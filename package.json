@@ -36,7 +36,8 @@
     ]
   },
   "scripts": {
-    "test": "node test.js | faucet",
-    "test:browser": "browserify test.js | testling | faucet"
+    "test": "browserify test.js | testling | faucet",
+    "test:babel": "browserify -t babelify test.js | testling | faucet",
+    "test:node": "babel-node test.js | faucet"
   }
 }

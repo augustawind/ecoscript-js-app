@@ -19,14 +19,6 @@ function world(things) {
     return world;
 }
 
-function isWalkable(world, vector) {
-    return (
-        _.inRange(vector.x, 0, world.width) &&
-        _.inRange(vector.y, 0, world.height) &&
-        get(world, vector).walkable
-    );
-}
-
 function get(world, vector) {
     return world.things[vector.y][vector.x];
 }
@@ -35,12 +27,43 @@ function set(world, vector, thing) {
     world.things[vector.y][vector.x] = thing;
 }
 
+function isWalkable(world, vector) {
+    return (
+        _.inRange(vector.x, 0, world.width) &&
+        _.inRange(vector.y, 0, world.height) &&
+        get(world, vector).walkable
+    );
+}
+
 function turn(world) {
-    _.each(world.things, thing => {
-        thing.act;
+    _.each(world.things, (row, y) => {
+        _.each(row, (thing, x) => {
+            thing.act(world, vector(x, y));
+        });
     });
 }
 
 module.exports = {
-    world
+    vector,
+    world,
+    get,
+    set,
+    isWalkable,
+    turn
 };
+
+function isWalkable(world, vector) {
+    return (
+        _.inRange(vector.x, 0, world.width) &&
+        _.inRange(vector.y, 0, world.height) &&
+        get(world, vector).walkable
+    );
+}
+
+function isWalkable(world, vector) {
+    return (
+        _.inRange(vector.x, 0, world.width) &&
+        _.inRange(vector.y, 0, world.height) &&
+        get(world, vector).walkable
+    );
+}
