@@ -1,5 +1,5 @@
 const test = require('tape');
-const W = require('./world');
+const W = require('../world');
 
 test('world.world', t => {
     t.plan(1);
