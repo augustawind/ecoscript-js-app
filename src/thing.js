@@ -5,7 +5,7 @@ function validate (expected) {
         if (_.every(expected, p => p in params))
             throw new Error('Missing parameters');
     };
-};
+}
 
 const validateThing = validate(['name', 'walkable']);
 
@@ -22,14 +22,14 @@ function wall () {
         name: 'wall',
         walkable: false
     });
-};
+}
 
 function floor () {
     return thing({
         name: 'floor',
         walkable: true
     });
-};
+}
 
 const validateOrganism = validate(['energy']);
 
@@ -38,3 +38,10 @@ function organism (params) {
 
     return thing(params);
 }
+
+module.exports = {
+    thing,
+    wall,
+    floor,
+    organism
+};
