@@ -17,5 +17,9 @@
     "babelify": "^7.2.0",
     "grunt": "^0.4.5",
     "tape": "^4.4.0"
+  },
+  "dependencies": {
+    "angular": "1.5.0",
+    "lodash": "4.3.0"
   }
 }
