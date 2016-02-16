@@ -1,12 +1,16 @@
+const _ = require('lodash');
+
 function validate (expected) {
-    return (params) => _(expected).every(p => p in params);
+    return (params) => {
+        if (_.every(expected, p => p in params))
+            throw new Error('Missing parameters');
+    };
 };
 
-validateThing = validate(['name', 'walkable']);
+const validateThing = validate(['name', 'walkable']);
 
 function thing (params) {
-    if (!validateThing(params))
-        throw new Error('Missing params');
+    validateThing(params);
 
     const thing = _.assign({}, params);
     thing.id = _.uniqueId();
@@ -27,12 +31,10 @@ function floor () {
     });
 };
 
-validateOrganism = validate(['energy']);
+const validateOrganism = validate(['energy']);
 
 function organism (params) {
-    if (!validateOrganism(params))
-        throw new Error('missing params');
+    validateOrganism(params);
 
     return thing(params);
 }
-
