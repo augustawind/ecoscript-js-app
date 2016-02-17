@@ -4,44 +4,50 @@ function vector(x, y) {
     return { x, y };
 }
 
-function world(things) {
-    const world = {};
+class World {
 
-    world.things = Array.from(things);
+    constructor(things) {
+        this.things = Array.from(things);
 
-    world.height = world.things.length;
-    world.width = world.things[0].length;
+        this.height = this.things.length;
+        this.width = this.things[0].length;
 
-    if (_.some(things, row => row.length !== world.width))
-        throw new Error('Width and/or height do not match things array');
+        if (_.some(things, row => row.length !== this.width))
+            throw new Error('Width/height do not match things array');
+    }
 
-    world.get = (vector) => {
-        return world.things[vector.y][vector.x];
-    };
+    static fromLegend(legend, keysArray) {
+        const things = keysArray.map(
+            (keys) => keys.map((k) => legend.get(k))
+        );
+        return new World(things);
+    }
 
-    world.set = (vector, thing) => {
-        world.things[vector.y][vector.x] = thing;
-    };
+    get(vector) {
+        return this.things[vector.y][vector.x];
+    }
 
-    world.isWalkable = (vector) => {
+    set(vector, thing) {
+        this.things[vector.y][vector.x] = thing;
+    }
+
+    isWalkable(vector) {
         return (
-            _.inRange(vector.x, 0, world.width) &&
-            _.inRange(vector.y, 0, world.height) &&
-            world.get(vector).walkable);
-    };
+            _.inRange(vector.x, 0, this.width) &&
+            _.inRange(vector.y, 0, this.height) &&
+            this.get(vector).walkable);
+    }
 
-    world.turn = () => {
-        _.each(world.things, (row, y) => {
+    turn() {
+        _.each(this.things, (row, y) => {
             _.each(row, (thing, x) => {
-                thing.act(world, vector(x, y));
+                thing.act(this, vector(x, y));
             });
         });
-    };
-
-    return world;
+    }
 }
 
 module.exports = {
     vector,
-    world,
+    World,
 };
