@@ -1,5 +1,21 @@
-const { vector, World } = require('./world');
-const { thing, organism } = require('./thing');
+const ecosystem = require('./ecosystem');
 
-window.World = World;
-window.thing = thing;
+function run() {
+    const doc = window.document;
+
+    const canvas = doc.createElement('pre');
+    doc.body.appendChild(canvas);
+
+    canvas.innerHTML = ecosystem.toString();
+
+    doc.addEventListener('keydown', (event) => {
+        if (event.keyCode !== 32)
+            return;
+        canvas.innerHTML = ecosystem.toString();
+        ecosystem.turn();
+    });
+}
+
+window.app = {
+    run
+};

@@ -1,5 +1,5 @@
 const test = require('tape');
-const {vector, World} = require('../src/world');
+const {Vector, World} = require('../src/world');
 
 test('world.World', t => {
     t.plan(1);
@@ -17,9 +17,20 @@ test('world.World', t => {
 test('world.World.fromLegend', t => {
     t.plan(1);
 
+    class W {
+        constructor() {
+            this.name = 'wall';
+        }
+    }
+    class F {
+        constructor() {
+            this.name = 'floor';
+        }
+    }
+
     const legend = new Map([
-        ['#', () => 'w'],
-        ['.', () => 'f']
+        ['#', W],
+        ['.', F]
     ]);
     const keys = [
         '#.#'.split(''),
@@ -28,8 +39,8 @@ test('world.World.fromLegend', t => {
     const world = World.fromLegend(legend, keys);
 
     const expected = [
-        'wfw'.split(''),
-        'wff'.split('')
+        [new W(), new F(), new W()],
+        [new W(), new F(), new F()]
     ];
 
     t.deepEqual(world.things, expected);
@@ -45,9 +56,9 @@ test('world.World.get', t => {
     ];
     const world = new World(things)
 
-    const v1 = vector(0, 0); // #
-    const v2 = vector(2, 1); // .
-    const v3 = vector(0, 2); // @
+    const v1 = new Vector(0, 0); // #
+    const v2 = new Vector(2, 1); // .
+    const v3 = new Vector(0, 2); // @
 
     t.equal(world.get(v1), '#');
     t.equal(world.get(v2), '.');
@@ -64,9 +75,9 @@ test('world.World.set', t => {
     ];
     const world = new World(things)
 
-    const v1 = vector(0, 0); // #
-    const v2 = vector(2, 1); // .
-    const v3 = vector(0, 2); // @
+    const v1 = new Vector(0, 0); // #
+    const v2 = new Vector(2, 1); // .
+    const v3 = new Vector(0, 2); // @
 
     world.set(v1, '!');
     world.set(v2, '@');
@@ -88,9 +99,9 @@ test('world.World.isWalkable', t => {
     ];
     const world = new World(things);
 
-    const v1 = vector(0, 0); // yes
-    const v2 = vector(2, 1); // no
-    const v3 = vector(1, 0); // yes
+    const v1 = new Vector(0, 0); // yes
+    const v2 = new Vector(2, 1); // no
+    const v3 = new Vector(1, 0); // yes
 
     t.equal(world.isWalkable(v1), true);
     t.equal(world.isWalkable(v2), false);
@@ -111,9 +122,9 @@ test('world.World.turn', t => {
     ];
     const world = new World(things);
 
-    const v1 = vector(0, 0);
-    const v2 = vector(1, 1);
-    const v3 = vector(2, 2);
+    const v1 = new Vector(0, 0);
+    const v2 = new Vector(1, 1);
+    const v3 = new Vector(2, 2);
 
     world.turn();
 

@@ -4,39 +4,15 @@
   <head>
     <meta charset="utf-8">
     <title>Ecosystem simulator</title>
+    <script src="bundle.js"></script>
   </head>
 
   <body>
-    <script src="bundle.js"></script>
-    <script>
-      const wall = () => thing({ name: 'wall', walkable: false });
-      const floor = () => thing({ name: 'floor', walkable: true });
-
-      const legend = new Map([
-          ['#', wall],
-          ['.', floor]
-      ]);
-      const worldMap = [
-          '#######'.split(''),
-          '#.....#'.split(''),
-          '#######'.split('')
-      ];
-      const toChar = new Map([
-          ['wall', '#'],
-          ['floor', '.']
-      ]);
-
-      const world = World.fromLegend(legend, worldMap);
-
-      const worldString = world.things.map(row => {
-          return row.map(thing => toChar.get(thing.name)).join('');
-      }).join('\n');
-
-      const pre = document.body.appendChild(document.createElement('pre'));
-      const node = document.createTextNode(worldString);
-      pre.appendChild(node);
-    </script>
   </body>
+
+  <script>
+    app.run();
+  </script>
 
 </html>
 

@@ -1,7 +1,10 @@
 const _ = require('lodash');
 
-function vector(x, y) {
-    return { x, y };
+class Vector {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
 }
 
 class World {
@@ -18,9 +21,22 @@ class World {
 
     static fromLegend(legend, keysArray) {
         const things = keysArray.map(
-            (keys) => keys.map((k) => legend.get(k)())
+            keys => {
+                return keys.map(
+                    k => {
+                        const Thing = legend.get(k);
+                        return new Thing();
+                    }
+                );
+            }
         );
         return new World(things);
+    }
+
+    toString() {
+        return this.things.map(row => {
+            return row.map(thing => thing.image).join('');
+        }).join('\n');
     }
 
     get width() {
@@ -53,13 +69,13 @@ class World {
     turn() {
         _.each(this.things, (row, y) => {
             _.each(row, (thing, x) => {
-                thing.act(this, vector(x, y));
+                thing.act(this, new Vector(x, y));
             });
         });
     }
 }
 
 module.exports = {
-    vector,
+    Vector,
     World,
 };

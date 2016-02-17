@@ -5,24 +5,31 @@ function validate(params, expected) {
         throw new Error('Missing parameters');
 }
 
-function thing(params) {
-    validate(params, ['name', 'walkable']);
+class Thing {
 
-    const thing = {
-        id: _.uniqueId()
-    };
-    Object.assign(thing, params);
+    constructor(params) {
+        this.id = _.uniqueId();
 
-    return thing;
+        validate(params, ['name', 'walkable']);
+        Object.assign(this, params);
+    }
+
+    act(world, vector) {
+        return;
+    }
+
 }
 
-function organism(params) {
-    validate(params, ['energy']);
+class Organism extends Thing {
 
-    return thing(params);
+    constructor(params) {
+        validate(params, ['energy']);
+        super(params);
+    }
+
 }
 
 module.exports = {
-    thing,
-    organism
+    Thing,
+    Organism
 };
