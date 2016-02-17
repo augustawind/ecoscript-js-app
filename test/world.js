@@ -18,8 +18,8 @@ test('world.World.fromLegend', t => {
     t.plan(1);
 
     const legend = new Map([
-        ['#', 'w'],
-        ['.', 'f']
+        ['#', () => 'w'],
+        ['.', () => 'f']
     ]);
     const keys = [
         '#.#'.split(''),

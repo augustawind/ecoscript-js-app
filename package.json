@@ -29,12 +29,13 @@
     "presets": ["es2015"]
   },
   "scripts": {
-    "build": "browserify -t babelify ecos.js > dist/ecos.js",
+    "build": "browserify -t babelify src/app.js > dist/bundle.js",
     "lint": "eslint src/*.js",
     "test": "tape -r babel-register test/*.js | faucet",
     "test:browser": "browserify -t babelify test/*.js | testling | faucet",
     "pretest": "npm run lint",
-    "prebuild": "npm run test",
+    "pretest:browser": "npm run lint",
+    "prebuild": "npm run test:browser",
     "prepublish": "npm run build"
   }
 }

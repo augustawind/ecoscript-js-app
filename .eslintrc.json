@@ -56,7 +56,7 @@
         "eqeqeq": 2,
         "func-names": 2,
         "func-style": [
-            2,
+            1,
             "declaration"
         ],
         "generator-star-spacing": 2,
@@ -149,7 +149,7 @@
         "no-trailing-spaces": 0,
         "no-undef-init": 2,
         "no-undefined": 2,
-        "no-underscore-dangle": 2,
+        "no-underscore-dangle": 0,
         "no-unmodified-loop-condition": 2,
         "no-unneeded-ternary": 2,
         "no-unused-expressions": 2,
