@@ -1,10 +1,10 @@
 {
   "name": "ecos",
   "version": "0.0.1",
-  "description": "Ecosystem simulator.",
+  "description": "Ecosystem simulator",
   "homepage": "https://github.com/dustinrohde/ecos",
   "repository": "https://github.com/dustinrohde/ecos",
-  "main": "ecos.js",
+  "main": "app.js",
   "directories": {
     "test": "test"
   },

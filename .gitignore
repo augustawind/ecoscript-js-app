@@ -1,4 +1,6 @@
 *.swp
 *.swo
 node_modules
+dist/bundle.js
 TODO.md
+
