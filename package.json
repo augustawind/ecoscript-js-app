@@ -19,17 +19,21 @@
     "eslint": "^2.1.0",
     "faucet": "0.0.1",
     "tape": "^4.4.0",
-    "testling": "^1.7.1"
+    "testling": "^1.7.1",
+    "watchify": "^3.7.0"
   },
   "dependencies": {
     "angular": "1.5.0",
     "lodash": "4.3.0"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   },
   "scripts": {
-    "build": "browserify -d -t babelify src/app.js > dist/bundle.js",
+    "start": "watchify src/*.js --debug -v -t babelify -o dist/bundle.js",
+    "build": "browserify -d -t babelify src/*.js > dist/bundle.js",
     "lint": "eslint src/*.js",
     "test": "tape -r babel-register test/*.js | faucet",
     "test:browser": "browserify -t babelify test/*.js | testling | faucet",

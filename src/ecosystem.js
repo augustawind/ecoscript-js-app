@@ -49,9 +49,28 @@ function wander(world, vector) {
     }
 }
 
+const directions = new Set([
+    new Vector(-1, -1),
+    new Vector(-1, 0),
+    new Vector(-1, 1),
+    new Vector(0, -1),
+    new Vector(0, 0),
+    new Vector(0, 1),
+    new Vector(1, -1),
+    new Vector(1, 0),
+    new Vector(1, 1)
+]);
+
 function eat(world, vector) {
-    // const dir = _.sample(util.directions);
-    return;
+    for (const dir of directions) {
+        const target = vector.plus(dir);
+        const thing = world.get(target);
+        if (thing.name === 'plant') {
+            world.set(target, new Floor());
+            return true;
+        }
+    }
+    return false;
 }
 
 class Herbivore extends Organism {
@@ -65,8 +84,17 @@ class Herbivore extends Organism {
         });
     }
 
-    get act() {
+    act(world, vector) {
+        if (!this.eat(world, vector))
+            this.wander(world, vector);
+    }
+
+    get wander() {
         return wander;
+    }
+
+    get eat() {
+        return eat;
     }
 }
 
