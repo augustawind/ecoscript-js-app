@@ -1,6 +1,6 @@
 const ecosystem = require('./ecosystem');
 
-function run() {
+window.onload = () => {
     const doc = window.document;
 
     const canvas = doc.createElement('pre');
@@ -8,14 +8,9 @@ function run() {
 
     canvas.innerHTML = ecosystem.toString();
 
-    doc.addEventListener('keydown', (event) => {
-        if (event.keyCode !== 32)
-            return;
+    const step = () => {
         canvas.innerHTML = ecosystem.toString();
         ecosystem.turn();
-    });
-}
-
-window.app = {
-    run
+    };
+    window.setInterval(step, 300);
 };
