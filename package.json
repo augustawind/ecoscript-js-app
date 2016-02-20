@@ -23,7 +23,6 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
-    "angular": "1.5.0",
     "lodash": "4.3.0"
   },
   "babel": {
