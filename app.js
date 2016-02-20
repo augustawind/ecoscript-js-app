@@ -12,5 +12,5 @@ window.onload = () => {
         canvas.innerHTML = ecosystem.toString();
         ecosystem.turn();
     };
-    window.setInterval(step, 1300);
+    window.setInterval(step, 300);
 };
