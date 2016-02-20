@@ -4,6 +4,7 @@ const Vector = require('../lib/vector');
 const World = require('../lib/world');
 const Thing = require('../lib/thing');
 const validate = require('../lib/validateArgs');
+const directions = require('../lib/directions');
 
 class Wall extends Thing {
 
@@ -59,18 +60,6 @@ function wander(world, vector) {
         world.set(vector2, this);
     }
 }
-
-const directions = new Set([
-    new Vector(-1, -1),
-    new Vector(-1, 0),
-    new Vector(-1, 1),
-    new Vector(0, -1),
-    new Vector(0, 0),
-    new Vector(0, 1),
-    new Vector(1, -1),
-    new Vector(1, 0),
-    new Vector(1, 1)
-]);
 
 function eat(world, vector) {
     for (const dir of directions) {
