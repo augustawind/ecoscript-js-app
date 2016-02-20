@@ -50,8 +50,8 @@ class Plant extends Organism {
 }
 
 function wander(world, vector) {
-    const dx = _.random(-1, 1);
-    const dy = _.random(-1, 1);
+    const dx = _.sample(directions);
+    const dy = _.sample(directions);
 
     const vector2 = new Vector(vector.x + dx, vector.y + dy);
 
