@@ -59,6 +59,7 @@ class Herbivore extends Organism {
     }
 
     act(world, vector) {
+        console.log(vector);
         if (this.eat(world, vector))
             return false;
         return this.wander(world, vector);
