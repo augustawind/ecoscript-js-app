@@ -1,6 +1,7 @@
 const _ = require('lodash');
 
-const { Vector, World } = require('../lib/world');
+const Vector = require('../lib/vector');
+const World = require('../lib/world');
 const { Thing, Organism } = require('../lib/thing');
 
 class Wall extends Thing {
