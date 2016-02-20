@@ -10,13 +10,13 @@ const ecosystem = World.fromLegend(
         ['H', things.Herbivore]
     ]),
     [
-        '#######'.split(''),
-        '# *   #'.split(''),
-        '# *   #'.split(''),
-        '#  *  #'.split(''),
-        '#  H  #'.split(''),
-        '#     #'.split(''),
-        '#######'.split('')
+        '#######',
+        '# *   #',
+        '# *   #',
+        '#  *  #',
+        '#  H  #',
+        '#     #',
+        '#######'
     ]
 );
 

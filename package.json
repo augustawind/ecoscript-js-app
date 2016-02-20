@@ -29,7 +29,7 @@
     "presets": ["es2015"]
   },
   "scripts": {
-    "start": "watchify **.js --debug -v -t babelify -o dist/bundle.js",
+    "start": "watchify app.js src/*.js lib/*.js --debug -v -t babelify -o dist/bundle.js",
     "build": "browserify -d -t babelify app.js > dist/bundle.js",
     "lint": "eslint src/*.js",
     "test": "tape -r babel-register test/*.js | faucet",

@@ -14,7 +14,7 @@ function *rotate(collection, start) {
 
 function wander(world, vector) {
     const start = _.random(directions.length);
-    for (let dir of rotate(directions, start)) {
+    for (const dir of rotate(directions, start)) {
         const vector2 = vector.plus(dir);
 
         if (world.isWalkable(vector2)) {

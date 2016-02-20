@@ -36,8 +36,8 @@ test('world.World.fromLegend', t => {
         ['.', F]
     ]);
     const keys = [
-        '#.#'.split(''),
-        '#..'.split(''),
+        '#.#',
+        '#..',
     ];
     const world = World.fromLegend(legend, keys);
 

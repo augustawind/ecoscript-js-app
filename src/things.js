@@ -10,8 +10,7 @@ class Wall extends Thing {
         super({
             name: 'wall',
             walkable: false,
-            image: '#'
-        });
+            image: '#' });
     }
 }
 
@@ -59,7 +58,6 @@ class Herbivore extends Organism {
     }
 
     act(world, vector) {
-        console.log(vector);
         if (this.eat(world, vector))
             return false;
         return this.wander(world, vector);
