@@ -1,9 +1,7 @@
-const _ = require('lodash');
-
 const World = require('../lib/world');
 
 const things = require('./things');
-const actions = require('./actions');
+
 
 const ecosystem = World.fromLegend(
     new Map([
