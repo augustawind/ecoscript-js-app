@@ -1,3 +1,5 @@
+require('babel-polyfill');
+
 const test = require('tape');
 const World = require('../lib/world');
 const Vector = require('../lib/vector');

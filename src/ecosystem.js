@@ -2,7 +2,8 @@ const _ = require('lodash');
 
 const Vector = require('../lib/vector');
 const World = require('../lib/world');
-const { Thing, Organism } = require('../lib/thing');
+const Thing = require('../lib/thing');
+const validate = require('../lib/validateArgs');
 
 class Wall extends Thing {
 
@@ -24,6 +25,15 @@ class Floor extends Thing {
             image: '.'
         });
     }
+}
+
+class Organism extends Thing {
+
+    constructor(params) {
+        validate(params, ['energy']);
+        super(params);
+    }
+
 }
 
 class Plant extends Organism {
