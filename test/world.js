@@ -1,5 +1,5 @@
 const test = require('tape');
-const {Vector, World} = require('../src/world');
+const {Vector, World} = require('../lib/world');
 
 test('world.World', t => {
     t.plan(1);
