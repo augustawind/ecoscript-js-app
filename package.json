@@ -32,8 +32,8 @@
     ]
   },
   "scripts": {
-    "start": "watchify src/*.js --debug -v -t babelify -o dist/bundle.js",
-    "build": "browserify -d -t babelify src/*.js > dist/bundle.js",
+    "start": "watchify app.js --debug -v -t babelify -o dist/bundle.js",
+    "build": "browserify -d -t babelify app.js > dist/bundle.js",
     "lint": "eslint src/*.js",
     "test": "tape -r babel-register test/*.js | faucet",
     "test:browser": "browserify -t babelify test/*.js | testling | faucet",
