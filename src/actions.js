@@ -3,14 +3,24 @@ const _ = require('lodash');
 const Vector = require('../lib/vector');
 const directions = require('../lib/directions');
 
+function *rotate(collection, start) {
+    for (let i = start; i < collection.length; i++) {
+        yield collection[i];
+    }
+    for (let i = 0; i < start; i++) {
+        yield collection[i];
+    }
+}
+
 function wander(world, vector) {
-    const d = _.sample(directions);
+    const start = _.random(directions.length);
+    for (let dir of rotate(directions, start)) {
+        const vector2 = vector.plus(dir);
 
-    const vector2 = new Vector(vector.x + d.x, vector.y + d.y);
-
-    if (world.isWalkable(vector2)) {
-        world.move(vector, vector2);
-        return true;
+        if (world.isWalkable(vector2)) {
+            world.move(vector, vector2);
+            return true;
+        } 
     }
     return false;
 }
