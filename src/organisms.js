@@ -86,8 +86,12 @@ class Predator extends Animal {
     act(world, vector) {
         return (
             this.eat(world, vector) ||
-            this.wander(world, vector)
+            this.bounce(world, vector)
         );
+    }
+
+    get bounce() {
+        return actions.bounce;
     }
 }
 

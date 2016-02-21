@@ -1,13 +1,5 @@
 const _ = require('lodash');
-
-function wander(world, vector) {
-    const dest = _.sample(world.viewWalkable(vector));
-    if (dest) {
-        world.move(vector, dest);
-        return true;
-    }
-    return false;
-}
+const directions = require('../lib/directions');
 
 function eat(world, vector) {
     for (const target of world.view(vector)) {
@@ -21,7 +13,33 @@ function eat(world, vector) {
     return false;
 }
 
+function wander(world, vector) {
+    const dest = _.sample(world.viewWalkable(vector));
+    if (dest) {
+        world.move(vector, dest);
+        return true;
+    }
+    return false;
+}
+
+function bounce(world, vector) {
+    if (!this.dir)
+        this.dir = _.sample(directions);
+
+    let dest = vector.plus(this.dir);
+    if (!world.isWalkable(dest)) {
+        dest = _.sample(world.viewWalkable(vector));
+        if (!dest) 
+            return false;
+    }
+
+    world.move(vector, dest);
+    this.dir = dest.minus(vector);
+    return true;
+}
+
 module.exports = {
     wander,
-    eat
+    eat,
+    bounce
 };
