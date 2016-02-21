@@ -33,6 +33,7 @@
     "build": "browserify -d -t babelify app.js > dist/bundle.js",
     "lint": "eslint app.js lib/*.js src/*.js",
     "test": "tape -r babel-register test/*.js | faucet",
-    "pretest": "npm run lint"
+    "pretest": "npm run lint",
+    "prebuild": "npm run lint"
   }
 }

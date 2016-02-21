@@ -1,13 +1,13 @@
 const World = require('../lib/world');
-
 const things = require('./things');
-
+const living = require('./organisms');
 
 const ecosystem = World.fromLegend(
     new Map([
         ['#', things.Wall],
-        ['*', things.Plant],
-        ['H', things.Herbivore]
+        ['*', living.Plant],
+        ['H', living.Herbivore],
+        ['@', living.Predator]
     ]),
     [
         '####################',
@@ -15,7 +15,7 @@ const ecosystem = World.fromLegend(
         '#  ***             #',
         '#   *  ***         #',
         '#   *   **   H  ***#',
-        '#              ****#',
+        '#       @      ****#',
         '#     *    H  *****#',
         '#    ***        ***#',
         '#   *****         *#',

@@ -9,10 +9,10 @@ function wander(world, vector) {
     return false;
 }
 
-function eat(world, vector, diet = []) {
+function eat(world, vector) {
     for (const target of world.view(vector)) {
         const thing = world.get(target);
-        if (thing && diet.includes(thing.name)) {
+        if (thing && this.diet.includes(thing.name)) {
             world.remove(target);
             this.energy += thing.energy;
             return true;
