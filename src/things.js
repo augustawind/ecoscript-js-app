@@ -6,7 +6,8 @@ class Wall extends Thing {
         super({
             name: 'wall',
             walkable: false,
-            image: '#' });
+            image: '#'
+        });
     }
 }
 
