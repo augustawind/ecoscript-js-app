@@ -56,7 +56,7 @@
         "eqeqeq": 2,
         "func-names": 2,
         "func-style": [
-            1,
+            0,
             "declaration"
         ],
         "generator-star-spacing": 2,
@@ -90,7 +90,7 @@
         "no-bitwise": 2,
         "no-caller": 2,
         "no-catch-shadow": 2,
-        "no-confusing-arrow": 2,
+        "no-confusing-arrow": 0,
         "no-console": 1,
         "no-continue": 2,
         "no-div-regex": 2,
@@ -145,7 +145,7 @@
         "no-shadow-restricted-names": 2,
         "no-spaced-func": 2,
         "no-sync": 2,
-        "no-ternary": 2,
+        "no-ternary": 0,
         "no-throw-literal": 2,
         "no-trailing-spaces": 0,
         "no-undef-init": 2,

@@ -28,10 +28,18 @@ class Floor extends Thing {
 class Organism extends Thing {
 
     constructor(params) {
-        validate(params, ['energy']);
+        validate(params, ['baseEnergy', 'maxEnergy']);
         super(params);
+        this._energy = this.baseEnergy;
     }
 
+    get energy() {
+        return this._energy;
+    }
+
+    set energy(energy) {
+        this._energy = Math.max(energy, this.maxEnergy);
+    }
 }
 
 class Plant extends Organism {
@@ -40,35 +48,41 @@ class Plant extends Organism {
         super({
             name: 'plant',
             walkable: false,
-            energy: 20,
+            baseEnergy: 20,
+            maxEnergy: 50,
             image: '*'
         });
     }
 }
 
-class Herbivore extends Organism {
+class Animal extends Organism {
 
-    constructor() {
-        super({
-            name: 'herbivore',
-            walkable: false,
-            energy: 30,
-            image: 'H'
-        });
-    }
-
-    act(world, vector) {
-        if (this.eat(world, vector))
-            return false;
-        return this.wander(world, vector);
+    get eat() {
+        return actions.eat;
     }
 
     get wander() {
         return actions.wander;
     }
+}
 
-    get eat() {
-        return actions.eat;
+class Herbivore extends Animal {
+
+    constructor() {
+        super({
+            name: 'herbivore',
+            walkable: false,
+            baseEnergy: 30,
+            maxEnergy: 70,
+            image: 'H'
+        });
+    }
+
+    act(world, vector) {
+        return (
+            this.eat(world, vector, ['plant']) ||
+            this.wander(world, vector)
+        );
     }
 }
 
