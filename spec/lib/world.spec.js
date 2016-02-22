@@ -153,11 +153,11 @@ describe('World', () => {
     });
 
     it('should tell you whether a vector is in bounds', () => {
-        const x = new Vector(2, 0);
-        const y = new Vector(0, 3);
-
-        expect(world.inBounds(x)).toBe(false);
-        expect(world.inBounds(y)).toBe(false);
+        expect(world.inBounds(new Vector(2, 0))).toBe(false);
+        expect(world.inBounds(new Vector(0, 3))).toBe(false);
+        expect(world.inBounds(new Vector(-1, 0))).toBe(false);
+        expect(world.inBounds(new Vector(0, -1))).toBe(false);
+        expect(world.inBounds(new Vector(-1, 4))).toBe(false);
     });
 
     describe('#isWalkable', () => {
