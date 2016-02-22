@@ -58,6 +58,7 @@ describe('World constructor', () => {
     });
 
     describe('#fromLegend', () => {
+
         it('should map each key in the given keys array to an instance of its corresponding class', () => {
             const keysArray = [
                 'ab',
@@ -86,7 +87,7 @@ describe('World constructor', () => {
 
 describe('World', () => {
 
-    const makeThing = (name, walkable) => {
+    const makeThing = (name, walkable = true) => {
         class Thing {
             constructor() {
                 this.name = name;
@@ -107,10 +108,6 @@ describe('World', () => {
             [null                 , makeThing('d', true )],
             [makeThing('e', false), null                 ],
         ]);
-    });
-
-    afterEach(() => {
-        world = undefined;
     });
 
     it('should let you get and set things by vector', () => {
@@ -156,7 +153,16 @@ describe('World', () => {
         expect(world.get(b).name).toBe('b');
     });
 
+    it('should tell you whether a vector is in bounds', () => {
+        const x = new Vector(2, 0);
+        const y = new Vector(0, 3);
+
+        expect(world.inBounds(x)).toBe(false);
+        expect(world.inBounds(y)).toBe(false);
+    });
+
     describe('#isWalkable', () => {
+
         const a = new Vector(0, 0);
         const b = new Vector(1, 0);
         const c = new Vector(0, 1);
@@ -181,5 +187,51 @@ describe('World', () => {
             expect(world.isWalkable(c)).toBe(true);
             expect(world.isWalkable(f)).toBe(true);
         });
+    });
+
+    describe('#view', () => {
+
+        beforeEach(() => {
+            world = new World([
+                [makeThing('a', true), makeThing('b', true), makeThing('c', true)],
+                [makeThing('d', false), makeThing('e', true), makeThing('f', false)],
+                [makeThing('g', true), makeThing('h', false), makeThing('i', true)],
+            ]);
+        });
+
+        it('should return a list of vectors that surround the given vector', () => {
+            const view = world.view(new Vector(1, 1));
+
+            expect(view.length).toBe(8);
+            expect(view).toContain(new Vector(0, 0));
+            expect(view).toContain(new Vector(0, 1));
+            expect(view).toContain(new Vector(0, 2));
+            expect(view).toContain(new Vector(1, 0));
+            expect(view).toContain(new Vector(2, 0));
+            expect(view).toContain(new Vector(1, 2));
+            expect(view).toContain(new Vector(2, 1));
+            expect(view).toContain(new Vector(2, 2));
+        });
+
+        it('should not include any vectors that are out of bounds', () => {
+            const view = world.view(new Vector(0, 0));
+
+            expect(view.length).toBe(3);
+            expect(view).toContain(new Vector(0, 1));
+            expect(view).toContain(new Vector(1, 0));
+            expect(view).toContain(new Vector(1, 1));
+        });
+
+        describe('#viewWalkable', () => {
+
+            it('should return only vectors whose positions are walkable and in bounds', () => {
+                const view = world.viewWalkable(new Vector(1, 0));
+                expect(view.length).toBe(3);
+                expect(view).toContain(new Vector(0, 0));
+                expect(view).toContain(new Vector(1, 1));
+                expect(view).toContain(new Vector(2, 0));
+            });
+        });
+
     });
 });

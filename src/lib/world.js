@@ -56,12 +56,16 @@ class World {
         return this._things;
     }
 
-    view(vector) {
+    _view(vector) {
         return directions.map(d => vector.plus(d));
     }
 
+    view(vector) {
+        return this._view(vector).filter(v => this.inBounds(v));
+    }
+
     viewWalkable(vector) {
-        return this.view(vector).filter(v => this.isWalkable(v));
+        return this._view(vector).filter(v => this.isWalkable(v));
     }
 
     get(vector) {
@@ -82,9 +86,13 @@ class World {
         this.remove(vector1);
     }
 
+    inBounds(vector) {
+        return (inRange(vector.x, 0, this.width) &&
+                inRange(vector.y, 0, this.height));
+    }
+
     isWalkable(vector) {
-        if (inRange(vector.x, 0, this.width) &&
-                inRange(vector.y, 0, this.height)) {
+        if (this.inBounds(vector)) {
             const thing = this.get(vector);
             return !thing || thing.walkable;
         }
