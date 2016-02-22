@@ -1,4 +1,4 @@
-const World = require('../lib/world');
+const World = require('./lib/world');
 const things = require('./things');
 const living = require('./organisms');
 

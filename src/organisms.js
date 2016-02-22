@@ -1,5 +1,5 @@
-const Thing = require('../lib/thing');
-const validate = require('../lib/validateArgs');
+const Thing = require('./lib/thing');
+const validate = require('./lib/validateArgs');
 const actions = require('./actions');
 
 class Organism extends Thing {

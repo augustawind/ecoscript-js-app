@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const directions = require('../lib/directions');
+const directions = require('./lib/directions');
 
 function eat(world, vector) {
     for (const target of world.view(vector)) {

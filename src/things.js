@@ -1,4 +1,4 @@
-const Thing = require('../lib/thing');
+const Thing = require('./lib/thing');
 
 class Wall extends Thing {
 

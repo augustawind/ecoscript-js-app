@@ -83,11 +83,12 @@ class World {
     }
 
     isWalkable(vector) {
-        const thing = this.get(vector);
-        return (
-            inRange(vector.x, 0, this.width) &&
-            inRange(vector.y, 0, this.height) &&
-            (!thing || thing.walkable));
+        if (inRange(vector.x, 0, this.width) &&
+                inRange(vector.y, 0, this.height)) {
+            const thing = this.get(vector);
+            return !thing || thing.walkable;
+        }
+        return false;
     }
 
     turn() {
