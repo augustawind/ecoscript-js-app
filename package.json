@@ -24,9 +24,7 @@
     "lodash": "4.3.0"
   },
   "babel": {
-    "presets": [
-      "es2015"
-    ]
+    "presets": ["es2015"]
   },
   "scripts": {
     "start": "watchify app.js --debug -v -t babelify -o dist/bundle.js",
