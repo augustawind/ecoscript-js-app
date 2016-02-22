@@ -171,6 +171,19 @@ describe('World', () => {
         expect(world.inBounds(new Vector(-1, 4))).toBe(false);
     });
 
+    describe('#enumerate', () => {
+        
+        it('should return an array of [vector, thing] pairs', () => {
+           const enumerated = world.enumerate(); 
+
+           things.forEach((row, y) => {
+               row.forEach((thing, x) => {
+                   expect(enumerated).toContain([new Vector(x, y), thing]);
+               });
+           });
+        });
+    });
+
     describe('#isWalkable', () => {
 
         const a = new Vector(0, 0);
