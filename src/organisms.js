@@ -1,12 +1,12 @@
 const Thing = require('./lib/thing');
-const validate = require('./lib/validateArgs');
 const actions = require('./actions');
 
 class Organism extends Thing {
 
-    constructor(params) {
-        validate(params, ['baseEnergy', 'maxEnergy']);
-        super(params);
+    constructor(params, expected = []) {
+        expected.push('baseEnergy', 'maxEnergy');
+        super(params, expected);
+
         this._energy = this.baseEnergy;
     }
 
@@ -21,10 +21,10 @@ class Organism extends Thing {
 
 class Animal extends Organism {
 
-    constructor(params) {
-        validate(params, ['diet', 'metabolism']);
+    constructor(params, expected = []) {
         params.walkable = false;
-        super(params);
+        expected.push('diet', 'metabolism');
+        super(params, expected);
     }
 
     get eat() {
@@ -46,6 +46,10 @@ class Plant extends Organism {
             baseEnergy: 20,
             maxEnergy: 50,
         });
+    }
+
+    get act() {
+        return actions.grow;
     }
 }
 

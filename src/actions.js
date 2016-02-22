@@ -1,6 +1,11 @@
 const _ = require('lodash');
 const directions = require('./lib/directions');
 
+function grow(world, vector) {
+    this.energy += this.growthRate;
+    return true;
+}
+
 function eat(world, vector) {
     for (const target of world.view(vector)) {
         const thing = world.get(target);
@@ -13,10 +18,21 @@ function eat(world, vector) {
     return false;
 }
 
+function reproduce(world, vector) {
+    const target = _.sample(world.viewWalkable(vector));
+    if (!target)
+        return false;
+
+    const baby = this.multiply();
+    console.log(baby);
+    world.set(target, baby);
+    return true;
+}
+    
+
 function wander(world, vector) {
     const dest = _.sample(world.viewWalkable(vector));
     if (dest) {
-        const dir = dest.minus(vector);
         world.move(vector, dest);
         return true;
     }
@@ -42,5 +58,7 @@ function bounce(world, vector) {
 module.exports = {
     wander,
     eat,
-    bounce
+    bounce,
+    grow,
+    reproduce,
 };
