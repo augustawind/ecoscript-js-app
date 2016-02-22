@@ -13,12 +13,10 @@
   "devDependencies": {
     "babel-cli": "6.5.1",
     "babel-preset-es2015": "6.5.0",
-    "babel-register": "6.5.2",
     "babelify": "7.2.0",
     "browserify": "13.0.0",
     "eslint": "2.1.0",
-    "faucet": "0.0.1",
-    "tape": "4.4.0",
+    "jasmine": "2.4.1",
     "watchify": "3.7.0"
   },
   "dependencies": {
@@ -26,14 +24,14 @@
     "lodash": "4.3.0"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   },
   "scripts": {
-    "start": "watchify app.js src/*.js lib/*.js --debug -v -t babelify -o dist/bundle.js",
-    "build": "browserify -d -t babelify app.js > dist/bundle.js",
-    "lint": "eslint app.js lib/*.js src/*.js",
-    "test": "tape -r babel-register test/*.js | faucet",
-    "pretest": "npm run lint",
-    "prebuild": "npm run lint"
+    "start": "watchify app.js --debug -v -t babelify -o dist/bundle.js",
+    "build": "browserify -d -t babelify app.js -o dist/bundle.js",
+    "lint": "eslint app.js src/*.js lib/*.js",
+    "test": "babel-node spec/spec.js"
   }
 }
