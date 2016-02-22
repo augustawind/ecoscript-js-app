@@ -24,7 +24,6 @@ function reproduce(world, vector) {
         return false;
 
     const baby = this.multiply();
-    console.log(baby);
     world.set(target, baby);
     return true;
 }

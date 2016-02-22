@@ -3,20 +3,16 @@ const Vector = require('../src/lib/vector');
 const Thing = require('../src/lib/thing');
 const actions = require('../src/actions');
 
-const makeThing = (name, { action = () => {}, walkable = false, baseEnergy = 0, maxEnergy = 0, diet = [], growthRate = 0 } = {}) => {
-    class Thing {
-        constructor() {
-            this.name = name;
-            this.walkable = walkable;
-            this.energy = baseEnergy;
-            this.diet = diet;
-            this.growthRate = growthRate;
-        }
-        get act() {
-            return action.bind(this);
-        }
-    }
-    return new Thing();
+//const makeThing = (name, { action = () => {}, walkable = false, baseEnergy = 0, maxEnergy = 0, diet = [], growthRate = 0 } = {}) => {
+const makeThing = (action = null, params = {}) => {
+    params.name = params.name || 'actor';
+    params.image = params.image || '@';
+    params.walkable = params.walkable || false;
+
+    const thing = new Thing(params);
+    thing.act = action && action.bind(thing);
+
+    return thing;
 };
 
 describe('movement actions', () => {
@@ -25,8 +21,8 @@ describe('movement actions', () => {
 
         it('should only move the actor 1 space', () => {
             for (let i = 0; i < 20; i++) {
-                const actor1 = makeThing('actor1', { action: actions.wander });
-                const actor2 = makeThing('actor2');
+                const actor1 = makeThing(actions.wander);
+                const actor2 = makeThing();
                 const actors = [
                     [null, null, null, null],
                     [null, null, null, null],
@@ -53,7 +49,7 @@ describe('movement actions', () => {
 
         it('should only move the actor 1 space', () => {
             for (let i = 0; i < 20; i++) {
-                const actor = makeThing('actor', { action: actions.bounce });
+                const actor = makeThing(actions.bounce);
                 const actors = [
                     [null, null, null, null],
                     [null, actor, null, null],
@@ -82,9 +78,9 @@ describe('actions#eat', () => {
     let predator, prey1, prey2, actors, world;
 
     beforeEach(() => {
-        predator = makeThing('predator', { action: actions.eat,  baseEnergy: 30, diet: ['prey'] });
-        prey1 = makeThing('prey', { baseEnergy: 20 });
-        prey2 = makeThing('prey', { baseEnergy: 10 });
+        predator = makeThing(actions.eat, { baseEnergy: 30, diet: ['prey'] });
+        prey1 = makeThing(null, { baseEnergy: 20 });
+        prey2 = makeThing(null, { baseEnergy: 10 });
         actors = [
             [null, null, null, null],
             [prey1, null, null, null],
@@ -113,7 +109,7 @@ describe('actions#eat', () => {
 describe('actions#grow', () => {
 
     it("should increment the actor's energy by its `growthRate`", () => {
-        const actor = makeThing('actor', { action: actions.grow, baseEnergy: 0, growthRate: 10 });
+        const actor = makeThing(actions.grow, { energy: 0, growthRate: 10 });
         const actors = [
             [actor, null],
             [null , null],
@@ -129,8 +125,7 @@ describe('actions#grow', () => {
 describe('actions#reproduce', () => {
 
     it("should create a new instance of the actor in an adjacent space", () => {
-        const actor = new Thing({ name: 'actor', walkable: false, image: '@' });
-        actor.act = actions.reproduce.bind(actor);
+        const actor = makeThing(actions.reproduce);
         const actors = [
             [null, null, null],
             [null, actor, null],
@@ -145,5 +140,6 @@ describe('actions#reproduce', () => {
                           .filter(t => t !== null)
                           .filter(t => t.constructor === actor.constructor);
         expect(things.length).toBe(1);
+        expect(things[0].constructor).toBe(actor.constructor);
     });
 });
