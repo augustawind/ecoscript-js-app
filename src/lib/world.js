@@ -30,12 +30,14 @@ class World {
         );
     }
 
-    *_iterThings() {
+    enumerate() {
+        const things = [];
         for (const [y, row] of this.things.entries()) {
             for (const [x, thing] of row.entries()) {
-                yield [new Vector(x, y), thing];
+                things.push([new Vector(x, y), thing]);
             }
         }
+        return things;
     }
 
     toString() {
@@ -100,9 +102,10 @@ class World {
     }
 
     turn() {
-        for (const [vector, thing] of this._iterThings()) {
-            if (thing)
+        for (const [vector, thing] of this.enumerate()) {
+            if (thing && thing.act) {
                 thing.act(this, vector);
+            }
         }
     }
 }

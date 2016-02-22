@@ -91,6 +91,7 @@ describe('World', () => {
         class Thing {
             constructor() {
                 this.name = name;
+                this.image = name;
                 this.walkable = walkable;
             }
             act(world, vector) { }
@@ -107,6 +108,16 @@ describe('World', () => {
             [makeThing('e', false), null                 ],
         ];
         world = new World(things);
+    });
+
+    it('should provide an accurate string representation', () => {
+        const expected = [
+            'ab',
+            ' d',
+            'e ',
+        ].join('\n');
+
+        expect(world.toString()).toBe(expected);
     });
 
     it('should let you get and set things by vector', () => {

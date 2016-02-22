@@ -16,6 +16,7 @@ function eat(world, vector) {
 function wander(world, vector) {
     const dest = _.sample(world.viewWalkable(vector));
     if (dest) {
+        const dir = dest.minus(vector);
         world.move(vector, dest);
         return true;
     }
@@ -31,10 +32,10 @@ function bounce(world, vector) {
         dest = _.sample(world.viewWalkable(vector));
         if (!dest) 
             return false;
+        this.dir = dest.minus(vector);
     }
 
     world.move(vector, dest);
-    this.dir = dest.minus(vector);
     return true;
 }
 
