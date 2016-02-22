@@ -1,4 +1,4 @@
-const Vector = require('../src/lib/vector');
+const Vector = require('../../src/lib/vector');
 
 describe('Vector', () => {
 

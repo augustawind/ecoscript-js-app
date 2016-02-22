@@ -1,5 +1,5 @@
-const Vector = require('../src/lib/vector');
-const World = require('../src/lib/world');
+const Vector = require('../../src/lib/vector');
+const World = require('../../src/lib/world');
 
 describe('World constructor', () => {
 
