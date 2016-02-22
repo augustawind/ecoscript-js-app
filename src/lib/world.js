@@ -30,7 +30,7 @@ class World {
         );
     }
 
-    *iterThings() {
+    *_iterThings() {
         for (const [y, row] of this.things.entries()) {
             for (const [x, thing] of row.entries()) {
                 yield [new Vector(x, y), thing];
@@ -87,8 +87,8 @@ class World {
     }
 
     inBounds(vector) {
-        return (inRange(vector.x, 0, this.width) &&
-                inRange(vector.y, 0, this.height));
+        return inRange(vector.x, 0, this.width) &&
+               inRange(vector.y, 0, this.height);
     }
 
     isWalkable(vector) {
@@ -100,7 +100,7 @@ class World {
     }
 
     turn() {
-        for (const [vector, thing] of this.iterThings()) {
+        for (const [vector, thing] of this._iterThings()) {
             if (thing)
                 thing.act(this, vector);
         }

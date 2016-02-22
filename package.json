@@ -31,7 +31,7 @@
   "scripts": {
     "start": "watchify app.js --debug -v -t babelify -o dist/bundle.js",
     "build": "browserify -d -t babelify app.js -o dist/bundle.js",
-    "lint": "eslint app.js src/*.js lib/*.js",
+    "lint": "eslint app.js src/*.js src/lib/*.js",
     "test": "babel-node spec/spec.js"
   }
 }

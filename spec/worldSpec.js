@@ -93,21 +93,20 @@ describe('World', () => {
                 this.name = name;
                 this.walkable = walkable;
             }
-            act(world, vector) {
-                return [world, vector];
-            }
+            act(world, vector) { }
         }
         return new Thing();
     };
 
-    let world;
+    let world, things;
 
     beforeEach(() => {
-        world = new World([
+        things = [
             [makeThing('a', true ), makeThing('b', false)],
             [null                 , makeThing('d', true )],
             [makeThing('e', false), null                 ],
-        ]);
+        ];
+        world = new World(things);
     });
 
     it('should let you get and set things by vector', () => {
@@ -232,6 +231,26 @@ describe('World', () => {
                 expect(view).toContain(new Vector(2, 0));
             });
         });
+    });
 
+    describe('#turn', () => {
+
+        it('should call the `act` method on every `thing`', () => {
+            for (const row of things) {
+                for (const thing of row) {
+                    if (thing)
+                        spyOn(thing, 'act');
+                }
+            }
+
+            world.turn();
+
+            for (const row of things) {
+                for (const thing of row) {
+                    if (thing)
+                        expect(thing.act).toHaveBeenCalledTimes(1);
+                }
+            }
+        });
     });
 });
