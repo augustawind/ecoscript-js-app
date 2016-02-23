@@ -25,10 +25,10 @@ function metabolize(world, vector) {
 
     if (this.energy <= 0) {
         world.remove(vector);
-        return false;
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 function eat(world, vector) {

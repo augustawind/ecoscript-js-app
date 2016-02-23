@@ -87,9 +87,9 @@ class Herbivore extends Animal {
             image: 'H',
 
             baseEnergy: 30,
-            maxEnergy: 70,
+            maxEnergy: 60,
 
-            metabolism: 10,
+            metabolism: 1,
             diet: ['plant']
         });
     }
@@ -97,6 +97,7 @@ class Herbivore extends Animal {
     act(world, vector) {
         return (
             this.reproduce(world, vector) ||
+            this.metabolize(world, vector) ||
             this.eat(world, vector) ||
             this.wander(world, vector)
         );
@@ -115,9 +116,9 @@ class Predator extends Animal {
             image: '@',
 
             baseEnergy: 50,
-            maxEnergy: 90,
+            maxEnergy: 70,
 
-            metabolism: 5,
+            metabolism: 1,
             diet: ['herbivore']
         });
     }
@@ -125,6 +126,7 @@ class Predator extends Animal {
     act(world, vector) {
         return (
             this.reproduce(world, vector) ||
+            this.metabolize(world, vector) ||
             this.eat(world, vector) ||
             this.bounce(world, vector)
         );
