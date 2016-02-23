@@ -140,5 +140,5 @@ class Predator extends Animal {
 module.exports = {
     Shrub,
     Herbivore,
-    Predator
+    Predator,
 };
