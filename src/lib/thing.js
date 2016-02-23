@@ -12,9 +12,9 @@ class Thing {
     }
 
     cloneFresh() {
-        const baby = cloneDeep(this);
-        Object.assign(baby, this.initialParams);
-        return baby;
+        const clone = cloneDeep(this);
+        Object.assign(clone, this.initialParams);
+        return clone;
     }
 }
 

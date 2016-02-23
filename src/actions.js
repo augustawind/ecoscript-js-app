@@ -2,7 +2,7 @@ const _ = require('lodash');
 const directions = require('./lib/directions');
 
 function reproduce(world, vector) {
-    if (this.energy < this.maxEnergy)
+    if (this.energy < this.maxEnergy * (Math.random() + 0.8))
         return false;
 
     const target = _.sample(world.viewWalkable(vector));

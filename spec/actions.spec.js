@@ -3,7 +3,6 @@ const Vector = require('../src/lib/vector');
 const Thing = require('../src/lib/thing');
 const actions = require('../src/actions');
 
-//const makeThing = (name, { action = () => {}, walkable = false, baseEnergy = 0, maxEnergy = 0, diet = [], growthRate = 0 } = {}) => {
 const makeThing = (action = null, params = {}) => {
     params.name = params.name || 'actor';
     params.image = params.image || '@';
