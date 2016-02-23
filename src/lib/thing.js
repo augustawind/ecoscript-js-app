@@ -1,3 +1,4 @@
+const cloneDeep = require('lodash/cloneDeep');
 const validate = require('./validateArgs');
 
 class Thing {
@@ -6,12 +7,14 @@ class Thing {
         expected.push('name', 'walkable', 'image');
         validate(params, expected);
 
-        this.initialParams = params;
         Object.assign(this, params);
+        this.initialParams = params;
     }
 
-    multiply() {
-        return new Thing(this.initialParams);
+    cloneFresh() {
+        const baby = cloneDeep(this);
+        Object.assign(baby, this.initialParams);
+        return baby;
     }
 }
 

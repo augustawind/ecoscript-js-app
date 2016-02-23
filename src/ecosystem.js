@@ -5,7 +5,7 @@ const living = require('./organisms');
 const ecosystem = World.fromLegend(
     new Map([
         ['#', things.Wall],
-        ['*', living.Plant],
+        ['*', living.Shrub],
         ['H', living.Herbivore],
         ['@', living.Predator]
     ]),

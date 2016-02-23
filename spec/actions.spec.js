@@ -140,6 +140,10 @@ describe('actions#reproduce', () => {
                           .filter(t => t !== null)
                           .filter(t => t.constructor === actor.constructor);
         expect(things.length).toBe(1);
-        expect(things[0].constructor).toBe(actor.constructor);
+
+        const baby = things[0];
+        expect(baby.__proto__).toBe(actor.__proto__);
+
+        expect(world.get(new Vector(1, 1))).toBe(actor);
     });
 });
