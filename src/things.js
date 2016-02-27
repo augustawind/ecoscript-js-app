@@ -22,7 +22,7 @@ class Floor extends Thing {
     }
 }
 
-module.exports = {
+export default {
     Wall,
     Floor
 }

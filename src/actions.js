@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import _ from 'lodash'
 import directions from './lib/directions'
 
 function reproduce(world, vector) {
@@ -68,7 +68,7 @@ function bounce(world, vector) {
     return true
 }
 
-module.exports = {
+export default {
     wander,
     eat,
     bounce,

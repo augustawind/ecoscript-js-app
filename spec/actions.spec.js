@@ -1,7 +1,7 @@
 import World from '../src/lib/world'
 import Vector from '../src/lib/vector'
 import Thing from '../src/lib/thing'
-import * as actions from '../src/actions'
+import actions from '../src/actions'
 
 const makeThing = (action = null, params = {}) => {
     params.name = params.name || 'actor'

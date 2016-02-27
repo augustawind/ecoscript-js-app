@@ -4,4 +4,4 @@ function validate(params, expected) {
             `Missing one or more parameters: ${expected.join(', ')}`)
 }
 
-module.exports = validate
+export { validate as default }

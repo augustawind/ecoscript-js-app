@@ -110,4 +110,4 @@ class World {
     }
 }
 
-module.exports = World
+export { World as default }

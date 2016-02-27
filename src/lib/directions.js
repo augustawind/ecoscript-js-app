@@ -11,4 +11,4 @@ const directions = [
     new Vector(-1, -1),
 ]
 
-module.exports = directions
+export { directions as default }

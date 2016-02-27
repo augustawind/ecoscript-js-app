@@ -14,4 +14,4 @@ class Vector {
     }
 }
 
-module.exports = Vector
+export { Vector as default }

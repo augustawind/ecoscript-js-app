@@ -1,5 +1,5 @@
-import * as living from './organisms'
-import * as things from './things'
+import living from './organisms'
+import things from './things'
 import World from './lib/world'
 
 const ecosystem = World.fromLegend(
@@ -31,4 +31,4 @@ const ecosystem = World.fromLegend(
     ]
 )
 
-module.exports = ecosystem
+export { ecosystem as default }

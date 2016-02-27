@@ -1,4 +1,4 @@
-import * as actions from './actions'
+import actions from './actions'
 import Thing from './lib/thing'
 
 // Base classes --------------------------------------------------------------
@@ -139,7 +139,7 @@ class Predator extends Animal {
 
 // ---------------------------------------------------------------------------
 
-module.exports = {
+export default {
     Shrub,
     Herbivore,
     Predator,

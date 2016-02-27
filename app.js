@@ -1,4 +1,4 @@
-const ecosystem = require('./src/ecosystem');
+import ecosystem from './src/ecosystem'
 
 window.onload = () => {
     const doc = window.document;

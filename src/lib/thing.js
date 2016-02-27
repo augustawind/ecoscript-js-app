@@ -18,4 +18,4 @@ class Thing {
     }
 }
 
-module.exports = Thing
+export { Thing as default }
