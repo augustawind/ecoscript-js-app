@@ -1,56 +1,56 @@
-const Thing = require('./lib/thing');
-const actions = require('./actions');
+const Thing = require('./lib/thing')
+const actions = require('./actions')
 
 // Base classes --------------------------------------------------------------
 
 class Organism extends Thing {
 
     constructor(params, expected = []) {
-        params.walkable = false;
-        expected.push('baseEnergy', 'maxEnergy');
-        super(params, expected);
+        params.walkable = false
+        expected.push('baseEnergy', 'maxEnergy')
+        super(params, expected)
 
-        this._energy = this.baseEnergy;
+        this._energy = this.baseEnergy
     }
 
     get energy() {
-        return this._energy;
+        return this._energy
     }
 
     set energy(energy) {
-        this._energy = Math.max(0, Math.min(energy, this.maxEnergy));
+        this._energy = Math.max(0, Math.min(energy, this.maxEnergy))
     }
 
     get reproduce() {
-        return actions.reproduce;
+        return actions.reproduce
     }
 }
 
 class Plant extends Organism {
 
     constructor(params, expected = []) {
-        expected.push('growthRate');
-        super(params, expected);
+        expected.push('growthRate')
+        super(params, expected)
     }
 
     get grow() {
-        return actions.grow;
+        return actions.grow
     }
 }
 
 class Animal extends Organism {
 
     constructor(params, expected = []) {
-        expected.push('diet', 'metabolism');
-        super(params, expected);
+        expected.push('diet', 'metabolism')
+        super(params, expected)
     }
 
     get metabolize() {
-        return actions.metabolize;
+        return actions.metabolize
     }
 
     get eat() {
-        return actions.eat;
+        return actions.eat
     }
 }
 
@@ -66,14 +66,14 @@ class Shrub extends Plant {
             baseEnergy: 20,
             maxEnergy: 50,
             growthRate: 1,
-        });
+        })
     }
 
     act(world, vector) {
         return (
             this.reproduce(world, vector) ||
             this.grow(world, vector)
-        );
+        )
     }
 }
 
@@ -91,7 +91,7 @@ class Herbivore extends Animal {
 
             metabolism: 1,
             diet: ['plant']
-        });
+        })
     }
 
     act(world, vector) {
@@ -100,11 +100,11 @@ class Herbivore extends Animal {
             this.metabolize(world, vector) ||
             this.eat(world, vector) ||
             this.wander(world, vector)
-        );
+        )
     }
 
     get wander() {
-        return actions.wander;
+        return actions.wander
     }
 }
 
@@ -120,7 +120,7 @@ class Predator extends Animal {
 
             metabolism: 1,
             diet: ['herbivore']
-        });
+        })
     }
 
     act(world, vector) {
@@ -129,11 +129,11 @@ class Predator extends Animal {
             this.metabolize(world, vector) ||
             this.eat(world, vector) ||
             this.bounce(world, vector)
-        );
+        )
     }
 
     get bounce() {
-        return actions.bounce;
+        return actions.bounce
     }
 }
 
@@ -143,4 +143,4 @@ module.exports = {
     Shrub,
     Herbivore,
     Predator,
-};
+}

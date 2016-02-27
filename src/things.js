@@ -1,4 +1,4 @@
-const Thing = require('./lib/thing');
+const Thing = require('./lib/thing')
 
 class Wall extends Thing {
 
@@ -7,7 +7,7 @@ class Wall extends Thing {
             name: 'wall',
             walkable: false,
             image: '#',
-        });
+        })
     }
 }
 
@@ -18,11 +18,11 @@ class Floor extends Thing {
             name: 'floor',
             walkable: true,
             image: '.',
-        });
+        })
     }
 }
 
 module.exports = {
     Wall,
     Floor
-};
+}
