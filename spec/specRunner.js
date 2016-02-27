@@ -1,5 +1,16 @@
 import Jasmine from 'jasmine'
 const jasmine = new Jasmine()
 
-jasmine.loadConfigFile('spec/support/jasmine.json')
+jasmine.loadConfig({
+    "spec_dir": "spec",
+    "spec_files": [
+        "**/*[sS]pec.js"
+    ],
+    "helpers": [
+        "helpers/**/*.js"
+    ],
+    "stopSpecOnExpectationFailure": false,
+    "random": true
+})
+
 jasmine.execute()

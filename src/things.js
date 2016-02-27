@@ -5,15 +5,20 @@ import { directions } from './lib/world'
 
 const Organism = stampit({
     init({ stamp }) {
-        this.energy = this.baseEnergy
-        this.another = () => stamp()
+        this.another = stamp
+
+        let energy = this.baseEnergy
+        Object.defineProperty(this, 'energy', {
+            get: () => energy,
+            set: (x) => energy = Math.max(0, Math.min(this.maxEnergy, x))
+        })
     },
     refs: {
         walkable: false,
     },
     methods: {
         reproduce(world, vector) {
-            if (this.energy < this.maxEnergy * (Math.random() + 0.8))
+            if (this.energy < this.maxEnergy)
                 return false
 
             const target = _.sample(world.viewWalkable(vector))

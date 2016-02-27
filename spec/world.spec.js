@@ -1,4 +1,4 @@
-import { World, Vector } from '../../src/lib/world'
+import { World, Vector } from '../src/lib/world'
 
 describe('Vector', () => {
 
