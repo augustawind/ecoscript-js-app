@@ -1,16 +1,18 @@
 import _ from 'lodash'
 import stampit from 'stampit'
 
-import { directions } from './lib/world'
+import { directions } from './world'
 
 const Organism = stampit({
     init({ stamp }) {
         this.another = stamp
 
         let energy = this.baseEnergy
-        Object.defineProperty(this, 'energy', {
+        Reflect.defineProperty(this, 'energy', {
             get: () => energy,
-            set: (x) => energy = Math.max(0, Math.min(this.maxEnergy, x))
+            set: (x) => {
+                energy = Math.max(0, Math.min(this.maxEnergy, x))
+            }
         })
     },
     refs: {

@@ -1,7 +1,7 @@
 import stampit from 'stampit'
 
 import things from './things'
-import World from './lib/world'
+import World from './world'
 
 const Wall = stampit({
     refs: {
