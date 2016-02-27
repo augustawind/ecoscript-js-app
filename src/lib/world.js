@@ -1,8 +1,32 @@
 import inRange from 'lodash/inRange'
 import map from 'lodash/map'
 
-import directions from './directions'
-import Vector from './vector'
+class Vector {
+
+    constructor(x, y) {
+        this.x = x
+        this.y = y
+    }
+
+    plus(vector) {
+        return new Vector(this.x + vector.x, this.y + vector.y)
+    }
+
+    minus(vector) {
+        return new Vector(this.x - vector.x, this.y - vector.y)
+    }
+}
+
+const directions = [
+    new Vector(0, -1),
+    new Vector(1, -1),
+    new Vector(1, 0),
+    new Vector(1, 1),
+    new Vector(0, 1),
+    new Vector(-1, 1),
+    new Vector(-1, 0),
+    new Vector(-1, -1),
+]
 
 class World {
 
@@ -111,3 +135,4 @@ class World {
 }
 
 export { World as default }
+export { directions, Vector, World }

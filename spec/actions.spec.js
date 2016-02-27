@@ -1,5 +1,4 @@
-import World from '../src/lib/world'
-import Vector from '../src/lib/vector'
+import { World, Vector } from '../src/lib/world'
 import Thing from '../src/lib/thing'
 import actions from '../src/actions'
 

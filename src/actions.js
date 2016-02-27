@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import directions from './lib/directions'
+import { directions } from './lib/world'
 
 function reproduce(world, vector) {
     if (this.energy < this.maxEnergy * (Math.random() + 0.8))
