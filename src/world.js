@@ -1,31 +1,38 @@
 import inRange from 'lodash/inRange'
 import map from 'lodash/map'
 
-class Vector {
-
-    constructor(x, y) {
-        this.x = x
-        this.y = y
-    }
-
+const VectorType = {
+    get x() {
+        return this.x
+    },
+    get y() {
+        return this.y
+    },
     plus(vector) {
-        return new Vector(this.x + vector.x, this.y + vector.y)
-    }
-
+        return Vector(this.x + vector.x, this.y + vector.y)
+    },
     minus(vector) {
-        return new Vector(this.x - vector.x, this.y - vector.y)
+        return Vector(this.x - vector.x, this.y - vector.y)
+    },
+}
+
+function Vector(x, y) {
+    return {
+        __proto__: VectorType,
+        x,
+        y,
     }
 }
 
 const directions = [
-    new Vector(0, -1),
-    new Vector(1, -1),
-    new Vector(1, 0),
-    new Vector(1, 1),
-    new Vector(0, 1),
-    new Vector(-1, 1),
-    new Vector(-1, 0),
-    new Vector(-1, -1),
+    Vector(0, -1),
+    Vector(1, -1),
+    Vector(1, 0),
+    Vector(1, 1),
+    Vector(0, 1),
+    Vector(-1, 1),
+    Vector(-1, 0),
+    Vector(-1, -1),
 ]
 
 class World {
@@ -37,7 +44,7 @@ class World {
         this._width = this._things[0].length
 
         if (things.some(row => row.length !== this.width))
-            throw new Error('Width/height do not match things array')
+            throw Error('Width/height do not match things array')
     }
 
     static fromLegend(legend, keysArray) {
@@ -46,7 +53,7 @@ class World {
                 return map(keys, k => {
                     if (legend.has(k)) {
                         const Thing = legend.get(k)
-                        return new Thing()
+                        return Thing()
                     }
                     return null
                 })
@@ -58,7 +65,7 @@ class World {
         const things = []
         for (const [y, row] of this.things.entries()) {
             for (const [x, thing] of row.entries()) {
-                things.push([new Vector(x, y), thing])
+                things.push([Vector(x, y), thing])
             }
         }
         return things
