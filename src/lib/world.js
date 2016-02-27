@@ -1,8 +1,8 @@
 import inRange from 'lodash/inRange'
 import map from 'lodash/map'
 
-import Vector from './vector'
 import directions from './directions'
+import Vector from './vector'
 
 class World {
 

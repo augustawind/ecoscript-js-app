@@ -1,5 +1,5 @@
-import Thing from './lib/thing'
 import * as actions from './actions'
+import Thing from './lib/thing'
 
 // Base classes --------------------------------------------------------------
 

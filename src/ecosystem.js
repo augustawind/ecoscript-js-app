@@ -1,6 +1,6 @@
-import World from './lib/world'
-import * as things from './things'
 import * as living from './organisms'
+import * as things from './things'
+import World from './lib/world'
 
 const ecosystem = World.fromLegend(
     new Map([

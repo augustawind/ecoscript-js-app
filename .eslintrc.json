@@ -5,6 +5,9 @@
         "es6": true
     },
     "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module"
+    },
     "rules": {
         "accessor-pairs": 2,
         "array-bracket-spacing": [
@@ -191,9 +194,9 @@
         "radix": 2,
         "require-jsdoc": 0,
         "require-yield": 2,
-        "semi": 2,
+        "semi": 0,
         "semi-spacing": 2,
-        "sort-imports": 2,
+        "sort-imports": 0,
         "sort-vars": 2,
         "space-before-blocks": 2,
         "space-before-function-paren": 0,
