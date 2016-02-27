@@ -36,11 +36,9 @@ describe('Vector', () => {
 
 describe('World constructor', () => {
 
-    const makeClass = (name) => {
-        return class  {
-            constructor() {
-                this.name = name
-            }
+    const makeThing = (name) => {
+        return () => {
+            return { name }
         }
     }
 
@@ -69,13 +67,13 @@ describe('World constructor', () => {
     })
 
     it('should place each thing in the proper position', () => {
-        const A = makeClass('a')
-        const B = makeClass('b')
-        const C = makeClass('c')
-        const D = makeClass('d')
+        const A = makeThing('a')
+        const B = makeThing('b')
+        const C = makeThing('c')
+        const D = makeThing('d')
         const things = [
-            [new A(), new B()],
-            [new C(), new D()],
+            [A(), B()],
+            [C(), D()],
         ]
         const world = new World(things)
 
@@ -98,10 +96,10 @@ describe('World constructor', () => {
                 'cd',
             ]
             const legend = new Map([
-                ['a', makeClass('a')],
-                ['b', makeClass('b')],
-                ['c', makeClass('c')],
-                ['d', makeClass('d')],
+                ['a', makeThing('a')],
+                ['b', makeThing('b')],
+                ['c', makeThing('c')],
+                ['d', makeThing('d')],
             ])
             const world = World.fromLegend(legend, keysArray)
 
@@ -121,15 +119,12 @@ describe('World constructor', () => {
 describe('World', () => {
 
     const makeThing = (name, walkable = true) => {
-        class Thing {
-            constructor() {
-                this.name = name
-                this.image = name
-                this.walkable = walkable
-            }
+        return {
+            name: name,
+            image: name,
+            walkable: walkable,
             act(world, vector) { }
         }
-        return new Thing()
     }
 
     let world, things
