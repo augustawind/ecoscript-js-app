@@ -1,5 +1,5 @@
-const Thing = require('./lib/thing')
-const actions = require('./actions')
+import Thing from './lib/thing'
+import * as actions from './actions'
 
 // Base classes --------------------------------------------------------------
 

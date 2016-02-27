@@ -1,4 +1,4 @@
-const Vector = require('./vector')
+import Vector from './vector'
 
 const directions = [
     new Vector(0, -1),

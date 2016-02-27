@@ -1,5 +1,5 @@
-const _ = require('lodash')
-const directions = require('./lib/directions')
+import * as _ from 'lodash'
+import directions from './lib/directions'
 
 function reproduce(world, vector) {
     if (this.energy < this.maxEnergy * (Math.random() + 0.8))

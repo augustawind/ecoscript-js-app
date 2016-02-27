@@ -1,7 +1,7 @@
-const World = require('../src/lib/world')
-const Vector = require('../src/lib/vector')
-const Thing = require('../src/lib/thing')
-const actions = require('../src/actions')
+import World from '../src/lib/world'
+import Vector from '../src/lib/vector'
+import Thing from '../src/lib/thing'
+import * as actions from '../src/actions'
 
 const makeThing = (action = null, params = {}) => {
     params.name = params.name || 'actor'

@@ -1,6 +1,6 @@
-const World = require('./lib/world')
-const things = require('./things')
-const living = require('./organisms')
+import World from './lib/world'
+import * as things from './things'
+import * as living from './organisms'
 
 const ecosystem = World.fromLegend(
     new Map([

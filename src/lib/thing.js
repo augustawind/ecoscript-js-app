@@ -1,5 +1,5 @@
-const cloneDeep = require('lodash/cloneDeep')
-const validate = require('./validateArgs')
+import cloneDeep from 'lodash/cloneDeep'
+import validate from './validateArgs'
 
 class Thing {
 

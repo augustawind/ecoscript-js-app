@@ -31,7 +31,7 @@
     ],
     "presets": [
       "es2015"
-    ],
+    ]
   },
   "scripts": {
     "start": "watchify app.js --debug -v -t babelify -o dist/bundle.js",

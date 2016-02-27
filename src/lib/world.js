@@ -1,8 +1,8 @@
-const inRange = require('lodash/inRange')
-const map = require('lodash/map')
+import inRange from 'lodash/inRange'
+import map from 'lodash/map'
 
-const Vector = require('./vector')
-const directions = require('./directions')
+import Vector from './vector'
+import directions from './directions'
 
 class World {
 

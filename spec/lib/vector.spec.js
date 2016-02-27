@@ -1,4 +1,4 @@
-const Vector = require('../../src/lib/vector')
+import Vector from '../../src/lib/vector'
 
 describe('Vector', () => {
 

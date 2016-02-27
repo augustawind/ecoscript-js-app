@@ -1,4 +1,4 @@
-const Thing = require('./lib/thing')
+import Thing from './lib/thing'
 
 class Wall extends Thing {
 
