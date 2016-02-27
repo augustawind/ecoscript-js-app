@@ -1,6 +1,17 @@
 import actions from './actions'
 import Thing from './lib/thing'
 
+class Wall extends Thing {
+
+    constructor() {
+        super({
+            name: 'wall',
+            walkable: false,
+            image: '#',
+        })
+    }
+}
+
 // Base classes --------------------------------------------------------------
 
 class Organism extends Thing {
