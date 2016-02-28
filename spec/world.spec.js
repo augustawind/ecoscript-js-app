@@ -120,11 +120,16 @@ describe('World', () => {
 
     const makeThing = (name, walkable = true, energy = 5) => {
         return {
-            name: name,
+            name,
             image: name,
-            walkable: walkable,
-            energy: energy,
-            act(world, vector) { }
+            walkable,
+            energy,
+            preAct(world, vector) {
+                return true
+            },
+            act(world, vector) {
+                return true
+            }
         }
     }
 
@@ -288,24 +293,50 @@ describe('World', () => {
 
     describe('#turn', () => {
 
-        it('should call the `act` method on every `thing`', () => {
+        beforeEach(() => {
+            things = [
+                [makeThing('a', true ), makeThing('b', false)],
+                [null                 , makeThing('d', true )],
+                [makeThing('e', false), null                 ],
+            ]
+            world = new World(things)
+
+            world.get(Vector(0, 0)).preAct = () => false
+            world.get(Vector(0, 2)).preAct = () => false
+
             for (const row of things) {
                 for (const thing of row) {
-                    if (thing)
+                    if (thing) {
                         spyOn(thing, 'act')
+                        spyOn(thing, 'preAct')
+                    }
                 }
             }
 
             world.turn()
+        })
 
+        it("should call each thing's `preAct` method once", () => {
             for (const row of things) {
                 for (const thing of row) {
                     if (thing)
-                        expect(thing.act).toHaveBeenCalledTimes(1)
+                        expect(thing.preAct).toHaveBeenCalledTimes(1)
                 }
             }
         })
-
+        it("should call each thing's `act` method if its `preAct` method returned false", () => {
+            for (const row of things) {
+                for (const thing of row) {
+                    if (thing) {
+                        if (thing.preAct() === false) {
+                            expect(thing.act).toHaveBeenCalledTimes(1)
+                        } else {
+                            expect(thing.act).not.toHaveBeenCalled()
+                        }
+                    }
+                }
+            }
+        })
         it('should check for things that have died and remove them', () => {
             const vector = Vector(0, 0)
             world.get(vector).energy = 0

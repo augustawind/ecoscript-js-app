@@ -39,7 +39,13 @@ const Plant = stampit({
         grow() {
             this.energy += this.growthRate
             return true
-        }
+        },
+        preAct(world, vector) {
+            return (
+                this.reproduce(world, vector) ||
+                this.grow(world, vector)
+            )
+        },
     }
 }).compose(Organism)
 
@@ -64,6 +70,12 @@ const Animal = stampit({
 
             world.remove(vector)
             return true
+        },
+        preAct(world, vector) {
+            return (
+                this.reproduce(world, vector) ||
+                this.metabolize(world, vector)
+            )
         },
     }
 }).compose(Organism)
