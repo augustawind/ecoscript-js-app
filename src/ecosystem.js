@@ -12,13 +12,15 @@ const Wall = stampit({
 })
 
 const Shrub = stampit({
+    init() {
+        this.baseEnergy = 3 + Math.random() * 4
+    },
     props: {
         name: 'plant',
         image: '*',
 
-        baseEnergy: 20,
-        maxEnergy: 50,
-        growthRate: 1,
+        maxEnergy: 20,
+        growthRate: 0.5,
     },
     methods: {
         act(world, vector) {
@@ -35,7 +37,7 @@ const Herbivore = stampit({
         name: 'herbivore',
         image: 'H',
 
-        baseEnergy: 30,
+        baseEnergy: 20,
         maxEnergy: 60,
 
         metabolism: 1,
@@ -47,18 +49,18 @@ const Herbivore = stampit({
                 this.metabolize(world, vector) ||
                 this.reproduce(world, vector) ||
                 this.eat(world, vector) ||
-                this.wander(world, vector)
+                this.bounce(world, vector)
             )
         },
     },
-}).compose(things.Animal, things.CanWander)
+}).compose(things.Animal, things.CanBounce)
 
 const Predator = stampit({
     props: {
         name: 'predator',
         image: '@',
 
-        baseEnergy: 50,
+        baseEnergy: 30,
         maxEnergy: 70,
 
         metabolism: 1,
@@ -70,11 +72,11 @@ const Predator = stampit({
                 this.metabolize(world, vector) ||
                 this.reproduce(world, vector) ||
                 this.eat(world, vector) ||
-                this.bounce(world, vector)
+                this.wander(world, vector)
             )
         }
     },
-}).compose(things.Animal, things.CanBounce)
+}).compose(things.Animal, things.CanWander)
         
 const ecosystem = World.fromLegend(
     new Map([
@@ -104,7 +106,5 @@ const ecosystem = World.fromLegend(
         '####################################################',
     ]
 )
-
-console.log(ecosystem)
 
 export { ecosystem as default }
