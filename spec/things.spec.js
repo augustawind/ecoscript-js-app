@@ -78,6 +78,15 @@ describe('Plant', () => {
 describe('Animal', () => {
 
     describe('#metabolize', () => {
+
+        const animal = t.Animal({ baseEnergy: 20, maxEnergy: 20, metabolism: 2 })
+        animal.metabolize()
+        animal.metabolize()
+        animal.metabolize()
+
+        it("should reduce the animal's energy by its metabolism", () => {
+            expect(animal.energy).toBe(14)
+        })
     })
 
     describe('#eat', () => {

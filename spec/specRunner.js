@@ -9,8 +9,8 @@ jasmine.loadConfig({
     "helpers": [
         "helpers/**/*.js"
     ],
-    "stopSpecOnExpectationFailure": false,
-    "random": true
+    "stopSpecOnExpectationFailure": true,
+    "random": false
 })
 
 jasmine.execute()

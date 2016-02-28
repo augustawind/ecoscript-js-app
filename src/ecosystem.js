@@ -44,8 +44,8 @@ const Herbivore = stampit({
     methods: {
         act(world, vector) {
             return (
-                this.reproduce(world, vector) ||
                 this.metabolize(world, vector) ||
+                this.reproduce(world, vector) ||
                 this.eat(world, vector) ||
                 this.wander(world, vector)
             )
@@ -67,8 +67,8 @@ const Predator = stampit({
     methods: {
         act(world, vector) {
             return (
-                this.reproduce(world, vector) ||
                 this.metabolize(world, vector) ||
+                this.reproduce(world, vector) ||
                 this.eat(world, vector) ||
                 this.bounce(world, vector)
             )
@@ -104,5 +104,7 @@ const ecosystem = World.fromLegend(
         '####################################################',
     ]
 )
+
+console.log(ecosystem)
 
 export { ecosystem as default }

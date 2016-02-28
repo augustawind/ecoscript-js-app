@@ -118,11 +118,12 @@ describe('World constructor', () => {
 
 describe('World', () => {
 
-    const makeThing = (name, walkable = true) => {
+    const makeThing = (name, walkable = true, energy = 5) => {
         return {
             name: name,
             image: name,
             walkable: walkable,
+            energy: energy,
             act(world, vector) { }
         }
     }
@@ -244,8 +245,8 @@ describe('World', () => {
 
         beforeEach(() => {
             world = new World([
-                [makeThing('a', true), makeThing('b', true), makeThing('c', true)],
-                [makeThing('d', false), makeThing('e', true), makeThing('f', false)],
+                [makeThing('a', true, 0), makeThing('b', true), makeThing('c', true)],
+                [makeThing('d', false), makeThing('e', true, 0), makeThing('f', false)],
                 [makeThing('g', true), makeThing('h', false), makeThing('i', true)],
             ])
         })
@@ -303,6 +304,13 @@ describe('World', () => {
                         expect(thing.act).toHaveBeenCalledTimes(1)
                 }
             }
+        })
+
+        it('should check for things that have died and remove them', () => {
+            const vector = Vector(0, 0)
+            world.get(vector).energy = 0
+            world.turn()
+            expect(world.get(vector)).toBe(null)
         })
     })
 })

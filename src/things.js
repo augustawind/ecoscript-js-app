@@ -57,15 +57,13 @@ const Animal = stampit({
             return false
         },
         metabolize(world, vector) {
-            const rate = Math.round(this.maxEnergy * (this.metabolism / 100))
-            this.energy -= rate
+            this.energy -= this.metabolism
 
-            if (this.energy <= 0) {
-                world.remove(vector)
-                return true
-            }
+            if (this.energy > 0)
+                return false
 
-            return false
+            world.remove(vector)
+            return true
         },
     }
 }).compose(Organism)
