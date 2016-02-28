@@ -46,8 +46,6 @@ const Herbivore = stampit({
     methods: {
         act(world, vector) {
             return (
-                this.reproduce(world, vector) ||
-                this.metabolize(world, vector) ||
                 this.eat(world, vector) ||
                 this.bounce(world, vector)
             )
@@ -70,8 +68,6 @@ const Predator = stampit({
         act(world, vector) {
             console.log(this.energy)
             return (
-                this.reproduce(world, vector) ||
-                this.metabolize(world, vector) ||
                 this.eat(world, vector) ||
                 this.energy < 10 ||
                 this.wander(world, vector)
