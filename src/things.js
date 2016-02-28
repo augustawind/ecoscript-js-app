@@ -84,6 +84,7 @@ const CanBounce = stampit({
             }
 
             world.move(vector, dest)
+            this.energy -= 0.8
             return true
         },
     },
@@ -93,11 +94,12 @@ const CanWander = stampit({
     methods: {
         wander(world, vector) {
             const dest = _.sample(world.viewWalkable(vector))
-            if (dest) {
-                world.move(vector, dest)
-                return true
-            }
-            return false
+            if (!dest)
+                return false
+
+            world.move(vector, dest)
+            this.energy -= 0.8
+            return true
         }
     }
 })

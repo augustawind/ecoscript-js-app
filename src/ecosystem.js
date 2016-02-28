@@ -20,7 +20,7 @@ const Shrub = stampit({
         image: '*',
 
         maxEnergy: 20,
-        growthRate: 0.5,
+        growthRate: 1,
     },
     methods: {
         act(world, vector) {
@@ -40,14 +40,14 @@ const Herbivore = stampit({
         baseEnergy: 20,
         maxEnergy: 60,
 
-        metabolism: 1,
+        metabolism: 0.2,
         diet: ['plant'],
     },
     methods: {
         act(world, vector) {
             return (
-                this.metabolize(world, vector) ||
                 this.reproduce(world, vector) ||
+                this.metabolize(world, vector) ||
                 this.eat(world, vector) ||
                 this.bounce(world, vector)
             )
@@ -63,15 +63,17 @@ const Predator = stampit({
         baseEnergy: 30,
         maxEnergy: 70,
 
-        metabolism: 1,
+        metabolism: 0.2,
         diet: ['herbivore'],
     },
     methods: {
         act(world, vector) {
+            console.log(this.energy)
             return (
-                this.metabolize(world, vector) ||
                 this.reproduce(world, vector) ||
+                this.metabolize(world, vector) ||
                 this.eat(world, vector) ||
+                this.energy < 10 ||
                 this.wander(world, vector)
             )
         }
