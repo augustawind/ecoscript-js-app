@@ -1,3 +1,5 @@
+import stampit from 'stampit'
+
 import { World, Vector } from '../src/world'
 import t from '../src/things'
 
@@ -30,7 +32,12 @@ describe('Organism', () => {
 
     describe('#reproduce', () => {
 
-        const org = t.Organism({ baseEnergy: 20, maxEnergy: 20 })
+        const org = stampit({
+            props: {
+                baseEnergy: 20,
+                maxEnergy: 20,
+            },
+        }).compose(t.Organism).create()
         const world = new World([
             [null, null, null],
             [null, org, null],
@@ -42,13 +49,16 @@ describe('Organism', () => {
         const orgs = world.view(Vector(1, 1))
                           .map(vector => world.get(vector))
                           .filter(th => th !== null)
+        const baby = orgs[0]
     
-        it('should create a just one organism in an adjacent space', () => {
+        it('should create just one organism in an adjacent space', () => {
             expect(orgs.length).toBe(1)
         })
         it('should create the baby from the same blueprint', () => {
-            const baby = orgs[0]
             expect(org.another).toBe(baby.another)
+        })
+        it("should set the baby's energy to its base level", () => {
+            expect(baby.energy).toBe(org.baseEnergy)
         })
         it('should not remove the parent organism', () => {
             expect(world.get(Vector(1, 1))).toBe(org)
