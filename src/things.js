@@ -36,7 +36,7 @@ const Organism = stampit({
 
 const Plant = stampit({
     methods: {
-        grow(world, vector) {
+        grow() {
             this.energy += this.growthRate
             return true
         }
