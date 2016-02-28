@@ -2,12 +2,14 @@ import _ from 'lodash'
 import stampit from 'stampit'
 
 import { directions } from './world'
+import * as settings from './settings'
 
 const Organism = stampit({
     init({ stamp }) {
         this.another = stamp
 
-        let energy = this.baseEnergy
+        let energy = this.baseEnergy + Math.random() *
+                     settings.Organism.baseEnergyVariation
         Reflect.defineProperty(this, 'energy', {
             get: () => energy,
             set: (x) => {
@@ -29,7 +31,6 @@ const Organism = stampit({
 
             this.energy = this.baseEnergy
             world.set(target, this.another())
-            console.log(world.get(target).energy, this.baseEnergy)
             return true
         },
     },

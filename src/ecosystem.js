@@ -2,6 +2,7 @@ import stampit from 'stampit'
 
 import things from './things'
 import World from './world'
+import * as settings from './settings'
 
 const Wall = stampit({
     refs: {
@@ -12,16 +13,7 @@ const Wall = stampit({
 })
 
 const Shrub = stampit({
-    init() {
-        this.baseEnergy = 3 + Math.random() * 4
-    },
-    props: {
-        name: 'plant',
-        image: '*',
-
-        maxEnergy: 20,
-        growthRate: 2,
-    },
+    refs: settings.Shrub,
     methods: {
         act(world, vector) {
             return (
@@ -33,17 +25,7 @@ const Shrub = stampit({
 }).compose(things.Plant)
 
 const Herbivore = stampit({
-    props: {
-        name: 'herbivore',
-        image: 'H',
-
-        baseEnergy: 20,
-        maxEnergy: 80,
-        movementCost: 0.8,
-
-        metabolism: 0.2,
-        diet: ['plant'],
-    },
+    refs: settings.Herbivore,
     methods: {
         act(world, vector) {
             return (
@@ -55,17 +37,7 @@ const Herbivore = stampit({
 }).compose(things.Animal, things.CanBounce)
 
 const Predator = stampit({
-    props: {
-        name: 'predator',
-        image: '@',
-
-        baseEnergy: 30,
-        maxEnergy: 70,
-        movementCost: 0.8,
-
-        metabolism: 0.2,
-        diet: ['herbivore'],
-    },
+    props: settings.Predator,
     methods: {
         act(world, vector) {
             return (
