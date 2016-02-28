@@ -9,7 +9,7 @@ const Organism = stampit({
         this.another = stamp
 
         let energy = this.baseEnergy + Math.random() *
-                     settings.Organism.baseEnergyVariation
+                     settings.baseEnergyVariation
         Reflect.defineProperty(this, 'energy', {
             get: () => energy,
             set: (x) => {
@@ -17,9 +17,7 @@ const Organism = stampit({
             }
         })
     },
-    refs: {
-        walkable: false,
-    },
+    refs: settings.Organism,
     methods: {
         reproduce(world, vector) {
             if (this.energy < this.maxEnergy)

@@ -1,5 +1,7 @@
+export const baseEnergyVariation = 4
+
 export const Organism = {
-    baseEnergyVariation: 4,
+    walkable: false,
 }
 
 export const Wall = {

@@ -5,11 +5,7 @@ import World from './world'
 import * as settings from './settings'
 
 const Wall = stampit({
-    refs: {
-        name: 'wall',
-        image: '#',
-        walkable: false,
-    }
+    refs: settings.Wall,
 })
 
 const Shrub = stampit({
