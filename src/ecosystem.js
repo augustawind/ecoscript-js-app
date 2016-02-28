@@ -20,7 +20,7 @@ const Shrub = stampit({
         image: '*',
 
         maxEnergy: 20,
-        growthRate: 1,
+        growthRate: 2,
     },
     methods: {
         act(world, vector) {
@@ -38,7 +38,8 @@ const Herbivore = stampit({
         image: 'H',
 
         baseEnergy: 20,
-        maxEnergy: 60,
+        maxEnergy: 80,
+        movementCost: 0.8,
 
         metabolism: 0.2,
         diet: ['plant'],
@@ -60,13 +61,13 @@ const Predator = stampit({
 
         baseEnergy: 30,
         maxEnergy: 70,
+        movementCost: 0.8,
 
         metabolism: 0.2,
         diet: ['herbivore'],
     },
     methods: {
         act(world, vector) {
-            console.log(this.energy)
             return (
                 this.eat(world, vector) ||
                 this.energy < 10 ||

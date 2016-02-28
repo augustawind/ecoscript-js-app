@@ -29,6 +29,7 @@ const Organism = stampit({
 
             this.energy = this.baseEnergy
             world.set(target, this.another())
+            console.log(world.get(target).energy, this.baseEnergy)
             return true
         },
     },
@@ -96,7 +97,7 @@ const CanBounce = stampit({
             }
 
             world.move(vector, dest)
-            this.energy -= 0.8
+            this.energy -= this.movementCost
             return true
         },
     },
@@ -110,7 +111,7 @@ const CanWander = stampit({
                 return false
 
             world.move(vector, dest)
-            this.energy -= 0.8
+            this.energy -= this.movementCost
             return true
         }
     }
