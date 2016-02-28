@@ -135,7 +135,7 @@ class World {
     turn() {
         for (const [vector, thing] of this.enumerate()) {
             if (thing) {
-                if (thing.energy && thing.energy === 0) {
+                if (thing.energy !== undefined && thing.energy <= 0) {
                     this.remove(vector)
                 } else if (thing.act) {
                     if (thing.preAct(this, vector) === false)
