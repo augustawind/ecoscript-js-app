@@ -4,10 +4,6 @@ import stampit from 'stampit'
 import { directions } from './world'
 import * as config from './config'
 
-const Wall = stampit({
-    refs: config.Wall,
-})
-
 const Organism = stampit({
     init({ stamp }) {
         this.another = stamp
@@ -120,4 +116,4 @@ const CanWander = stampit({
     }
 })
 
-export default { Wall, Organism, Plant, Animal, CanBounce, CanWander }
+export default { Organism, Plant, Animal, CanBounce, CanWander }
