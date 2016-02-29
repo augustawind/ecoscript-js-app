@@ -51,11 +51,10 @@ class World {
         return new World(
             map(keysArray, keys => {
                 return map(keys, k => {
-                    if (legend.has(k)) {
-                        const Thing = legend.get(k)
-                        return Thing()
-                    }
-                    return null
+                    if (!legend.has(k))
+                        return null
+                    const Thing = legend.get(k)
+                    return Thing()
                 })
             })
         )

@@ -1,16 +1,26 @@
+import random from 'lodash/random'
+
 import parseWorld from './src/configParser'
 
-function animateWorld(world) {
-    const doc = window.document;
+function randomizeWorld(world) {
+    for (const [_, thing] of world.enumerate()) {
+        if (thing && 'energy' in thing) {
+            thing.energy = random(thing.baseEnergy, thing.maxEnergy)
+        }
+    }
+}
 
-    const canvas = doc.createElement('pre');
-    doc.body.appendChild(canvas);
+function animateWorld(world) {
+    const doc = window.document
+
+    const canvas = doc.createElement('pre')
+    doc.body.appendChild(canvas)
 
     const step = () => {
-        canvas.innerHTML = world.toString();
-        world.turn();
-    };
-    window.setInterval(step, 300);
+        canvas.innerHTML = world.toString()
+        world.turn()
+    }
+    window.setInterval(step, 300)
 }
 
 window.onload = () => {
@@ -20,6 +30,7 @@ window.onload = () => {
     xhr.onload = () => {
         const json = JSON.parse(xhr.responseText)
         const world = parseWorld(json)
+        randomizeWorld(world)
         animateWorld(world)
     }
 
@@ -29,4 +40,4 @@ window.onload = () => {
 
     xhr.open('get', url, true)
     xhr.send()
-};
+}

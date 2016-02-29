@@ -34,8 +34,7 @@
                 "baseEnergy": 3,
                 "maxEnergy": 20,
                 "growthRate": 2
-            },
-            "actions": []
+            }
         }
     },
     "animals": {

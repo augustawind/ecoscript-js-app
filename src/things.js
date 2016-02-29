@@ -1,20 +1,27 @@
-import _ from 'lodash'
+import sample from 'lodash/sample'
 import stampit from 'stampit'
 
 import { directions } from './world'
-import * as config from './config'
 
 const Wall = stampit({
-    refs: config.Wall,
+    refs: {
+        name: 'wall',
+        image: '#',
+        walkable: false,
+    },
 })
 
 const Organism = stampit({
-    refs: config.Organism,
-    init({ stamp }) {
+    refs: {
+        walkable: false,
+    },
+    init({ stamp, args }) {
         this.another = stamp
 
-        let energy = this.baseEnergy + Math.random() *
-                     config.baseEnergyVariation
+        let energy = this.baseEnergy
+        if (args[0] && 'energy' in args[0])
+            energy = args[0].energy
+
         Reflect.defineProperty(this, 'energy', {
             get: () => energy,
             set: (x) => {
@@ -27,7 +34,7 @@ const Organism = stampit({
             if (this.energy < this.maxEnergy)
                 return false
 
-            const target = _.sample(world.viewWalkable(vector))
+            const target = sample(world.viewWalkable(vector))
             if (!target)
                 return false
 
@@ -87,13 +94,13 @@ const Animal = stampit({
 const CanBounce = stampit({
     init() {
         if (!this.dir)
-            this.dir = _.sample(directions)
+            this.dir = sample(directions)
     },
     methods: {
         bounce(world, vector) {
             let dest = vector.plus(this.dir)
             if (!world.isWalkable(dest)) {
-                dest = _.sample(world.viewWalkable(vector))
+                dest = sample(world.viewWalkable(vector))
                 if (!dest)
                     return false
                 this.dir = dest.minus(vector)
@@ -109,7 +116,7 @@ const CanBounce = stampit({
 const CanWander = stampit({
     methods: {
         wander(world, vector) {
-            const dest = _.sample(world.viewWalkable(vector))
+            const dest = sample(world.viewWalkable(vector))
             if (!dest)
                 return false
 
