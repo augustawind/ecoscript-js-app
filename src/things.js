@@ -4,7 +4,12 @@ import stampit from 'stampit'
 import { directions } from './world'
 import * as config from './config'
 
+const Wall = stampit({
+    refs: config.Wall,
+})
+
 const Organism = stampit({
+    refs: config.Organism,
     init({ stamp }) {
         this.another = stamp
 
@@ -17,7 +22,6 @@ const Organism = stampit({
             }
         })
     },
-    refs: config.Organism,
     methods: {
         reproduce(world, vector) {
             if (this.energy < this.maxEnergy)
@@ -116,4 +120,4 @@ const CanWander = stampit({
     }
 })
 
-export default { Organism, Plant, Animal, CanBounce, CanWander }
+export default { Wall, Organism, Plant, Animal, CanBounce, CanWander }

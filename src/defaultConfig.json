@@ -1,7 +1,6 @@
 {
     "world": {
         "legend": [
-            ["#", "Wall"],
             ["*", "Shrub"],
             ["H", "Herbivore"],
             ["@", "Predator"]
@@ -69,7 +68,7 @@
             "actions": {
                 "move": {
                     "strategy": "wander",
-                    "condition": "energy > 10"
+                    "condition": "this.energy < 10"
                 }
             }
         }

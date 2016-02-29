@@ -1,6 +1,5 @@
-const fs = require('fs')
-
 import forOwn from 'lodash/forOwn'
+import upperFirst from 'lodash/upperFirst'
 import stampit from 'stampit'
 
 import World from '../src/world'
@@ -13,13 +12,13 @@ function parsePlant(config) {
 }
 
 function parseAnimal(config) {
-    const move = config.actions.move
+    const strategy = config.actions.move.strategy
+    const condition = config.actions.move.condition || 'false'
 
-    let condition = 'true'
-    if (typeof move === 'object' && move.condition &&
-            typeof move.condition === 'string') {
-        condition = move.condition.replace(/\b(w+)\b/, 'this.$1')
-    }
+    const mixins = [
+        things.Animal,
+        things[`Can${upperFirst(strategy)}`],
+    ]
 
     return stampit({
         refs: config.properties,
@@ -28,11 +27,11 @@ function parseAnimal(config) {
                 return (
                     this.eat(world, vector) ||
                     eval(condition) ||
-                    this[move](world, vector)
+                    this[strategy](world, vector)
                 )
             }
         }
-    }).compose(things.Animal, things[`Can${move.toUpperCase}`])
+    }).compose(...mixins)
 }
 
 function parseOrganisms(config) {
@@ -48,20 +47,15 @@ function parseOrganisms(config) {
 
 function parseWorld(config) {
     const organisms = parseOrganisms(config)
-    organisms.Wall = stampit({
-        refs: config.Wall,
-    })
 
     const legend = new Map(
         config.world.legend.map(([key, val]) => {
             return [key, organisms[val]]
         })
     )
+    legend.set('#', things.Wall)
     
     return World.fromLegend(legend, config.world.map)
 }
 
-const json = fs.readFileSync('./config.json', 'utf8')
-const config = JSON.parse(json)
-
-const world = parseWorld(config)
+export { parseWorld as default }

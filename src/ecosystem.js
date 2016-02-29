@@ -4,20 +4,10 @@ import things from './things'
 import World from './world'
 import * as config from './config'
 
-const Wall = stampit({
-    refs: config.Wall,
-})
+const Wall = things.Wall
 
 const Shrub = stampit({
     refs: config.Shrub,
-    methods: {
-        act(world, vector) {
-            return (
-                this.reproduce(world, vector) ||
-                this.grow(world, vector)
-            )
-        },
-    },
 }).compose(things.Plant)
 
 const Herbivore = stampit({

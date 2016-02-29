@@ -53,7 +53,6 @@ class World {
                 return map(keys, k => {
                     if (legend.has(k)) {
                         const Thing = legend.get(k)
-                        console.log(k, Thing)
                         return Thing()
                     }
                     return null
@@ -138,8 +137,9 @@ class World {
             if (thing) {
                 if (thing.hasOwnProperty('energy') && thing.energy <= 0) {
                     this.remove(vector)
-                } else if (thing.act) {
-                    if (thing.preAct(this, vector) === false)
+                } else if (thing.preAct) {
+                    const acted = thing.preAct(this, vector)
+                    if (acted === false)
                         thing.act(this, vector)
                 }
             }
