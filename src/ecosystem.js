@@ -2,14 +2,14 @@ import stampit from 'stampit'
 
 import things from './things'
 import World from './world'
-import * as settings from './settings'
+import * as config from './config'
 
 const Wall = stampit({
-    refs: settings.Wall,
+    refs: config.Wall,
 })
 
 const Shrub = stampit({
-    refs: settings.Shrub,
+    refs: config.Shrub,
     methods: {
         act(world, vector) {
             return (
@@ -21,7 +21,7 @@ const Shrub = stampit({
 }).compose(things.Plant)
 
 const Herbivore = stampit({
-    refs: settings.Herbivore,
+    refs: config.Herbivore,
     methods: {
         act(world, vector) {
             return (
@@ -33,7 +33,7 @@ const Herbivore = stampit({
 }).compose(things.Animal, things.CanBounce)
 
 const Predator = stampit({
-    props: settings.Predator,
+    props: config.Predator,
     methods: {
         act(world, vector) {
             return (

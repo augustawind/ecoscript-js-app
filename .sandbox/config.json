@@ -1,0 +1,77 @@
+{
+    "world": {
+        "legend": [
+            ["#", "Wall"],
+            ["*", "Shrub"],
+            ["H", "Herbivore"],
+            ["@", "Predator"]
+        ],
+        "map": [
+            "####################################################",
+            "#                 ####         ****              ###",
+            "#   *  @  ##                 ########       HH    ##",
+            "#   *    ##        H H                 ****       *#",
+            "#       ##*                        ##########     *#",
+            "#      ##***  *         ****                     **#",
+            "#* **  #  *  ***      #########                  **#",
+            "#* **  #      *               #   *              **#",
+            "#     ##              #   H   #  ***          ######",
+            "#*            @       #       #   *        H  #    #",
+            "#*                    #  ######                 ** #",
+            "###          ****          ***                  ** #",
+            "#       H                        @         H       #",
+            "#   *     ##  ##  ##  ##               ###      *  #",
+            "#   **         #              *       #####  H     #",
+            "##  **  H   H  #  #    ***  ***        ###      ** #",
+            "###               #   *****                    ****#",
+            "####################################################"
+        ]
+    },
+    "plants": {
+        "Shrub": {
+            "properties": {
+                "name": "plant",
+                "image": "*",
+                "baseEnergy": 3,
+                "maxEnergy": 20,
+                "growthRate": 2
+            },
+            "actions": []
+        }
+    },
+    "animals": {
+        "Herbivore": {
+            "properties": {
+                "name": "herbivore",
+                "image": "H",
+                "baseEnergy": 20,
+                "maxEnergy": 80,
+                "movementCost": 0.8,
+                "metabolism": 0.2,
+                "diet": ["plant"]
+            },
+            "actions": {
+                "move": {
+                    "strategy": "bounce"
+                }
+            }
+        },
+        "Predator": {
+            "properties": {
+                "name": "predator",
+                "image": "@",
+                "baseEnergy": 30,
+                "maxEnergy": 70,
+                "movementCost": 0.8,
+                "metabolism": 0.2,
+                "diet": ["herbivore"]
+            },
+            "actions": {
+                "move": {
+                    "strategy": "wander",
+                    "condition": "energy > 10"
+                }
+            }
+        }
+    }
+}

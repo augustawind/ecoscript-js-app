@@ -53,6 +53,7 @@ class World {
                 return map(keys, k => {
                     if (legend.has(k)) {
                         const Thing = legend.get(k)
+                        console.log(k, Thing)
                         return Thing()
                     }
                     return null

@@ -2,14 +2,18 @@ import _ from 'lodash'
 import stampit from 'stampit'
 
 import { directions } from './world'
-import * as settings from './settings'
+import * as config from './config'
+
+const Wall = stampit({
+    refs: config.Wall,
+})
 
 const Organism = stampit({
     init({ stamp }) {
         this.another = stamp
 
         let energy = this.baseEnergy + Math.random() *
-                     settings.baseEnergyVariation
+                     config.baseEnergyVariation
         Reflect.defineProperty(this, 'energy', {
             get: () => energy,
             set: (x) => {
@@ -17,7 +21,7 @@ const Organism = stampit({
             }
         })
     },
-    refs: settings.Organism,
+    refs: config.Organism,
     methods: {
         reproduce(world, vector) {
             if (this.energy < this.maxEnergy)
@@ -116,4 +120,4 @@ const CanWander = stampit({
     }
 })
 
-export default { Organism, Plant, Animal, CanBounce, CanWander }
+export default { Wall, Organism, Plant, Animal, CanBounce, CanWander }
