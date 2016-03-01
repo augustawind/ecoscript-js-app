@@ -1,5 +1,6 @@
 import inRange from 'lodash/inRange'
 import map from 'lodash/map'
+import range from 'lodash/range'
 
 const VectorType = {
     get x() {
@@ -88,16 +89,28 @@ class World {
         return this._things
     }
 
-    _view(vector) {
-        return directions.map(d => vector.plus(d))
+    _view(origin, distance) {
+        const vectors = []
+
+        const _range = range(-distance, distance + 1)
+        _range.forEach(dx => {
+            _range.forEach(dy => {
+                if (dx !== 0 || dy !== 0)
+                    vectors.push(origin.plus(Vector(dx, dy)))
+            })
+        })
+
+        return vectors
     }
 
-    view(vector) {
-        return this._view(vector).filter(v => this.inBounds(v))
+    view(vector, distance = 1) {
+        return this._view(vector, distance).
+            filter(v => this.inBounds(v))
     }
 
-    viewWalkable(vector) {
-        return this._view(vector).filter(v => this.isWalkable(v))
+    viewWalkable(vector, distance = 1) {
+        return this._view(vector, distance).
+            filter(v => this.isWalkable(v))
     }
 
     get(vector) {
