@@ -1,3 +1,4 @@
+import clamp from 'lodash/clamp'
 import sample from 'lodash/sample'
 import stampit from 'stampit'
 
@@ -25,7 +26,7 @@ const Organism = stampit({
         Reflect.defineProperty(this, 'energy', {
             get: () => energy,
             set: (x) => {
-                energy = Math.max(0, Math.min(this.maxEnergy, x))
+                energy = clamp(x, 0, this.maxEnergy)
             }
         })
     },
@@ -123,8 +124,16 @@ const CanWander = stampit({
             world.move(vector, dest)
             this.energy -= this.movementCost
             return true
-        }
-    }
+        },
+    },
 })
 
-export default { Wall, Organism, Plant, Animal, CanBounce, CanWander }
+const Hunter = stampit({
+    methods: {
+        hunt(world, vector) {
+            return false
+        },
+    },
+})
+
+export default { Wall, Organism, Plant, Animal, Hunter, CanBounce, CanWander }
