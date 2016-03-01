@@ -129,11 +129,11 @@ describe('Animal', () => {
     })
 })
 
-describe('CanWander', () => {
+describe('Wander', () => {
 
     it('should only move the thing 1 space', () => {
         for (let i = 0; i < 20; i++) {
-            const wanderer = t.CanWander()
+            const wanderer = t.Wander()
             const world = new World([
                 [null, null, null, null],
                 [null, null, null, null],
@@ -153,11 +153,11 @@ describe('CanWander', () => {
     })
 })
 
-describe('CanBounce', () => {
+describe('Bounce', () => {
 
     it('should only move the thing 1 space', () => {
         for (let i = 0; i < 20; i++) {
-            const thing = t.CanBounce()
+            const thing = t.Bounce()
             const world = new World([
                 [null, null, null, null],
                 [null, thing, null, null],

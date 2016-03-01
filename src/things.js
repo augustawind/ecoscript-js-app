@@ -92,7 +92,7 @@ const Animal = stampit({
     }
 }).compose(Organism)
 
-const CanBounce = stampit({
+const Bounce = stampit({
     init() {
         if (!this.dir)
             this.dir = sample(directions)
@@ -114,7 +114,7 @@ const CanBounce = stampit({
     },
 })
 
-const CanWander = stampit({
+const Wander = stampit({
     methods: {
         wander(world, vector) {
             const dest = sample(world.viewWalkable(vector))
@@ -128,12 +128,20 @@ const CanWander = stampit({
     },
 })
 
-const Hunter = stampit({
+const Hunt = stampit({
     methods: {
         hunt(world, vector) {
-            return false
+            const view = world.view(vector, this.senseRadius)
+            for (const target of view) {
+                const thing = world.get(target)
+                if (thing && this.diet.includes(thing.name)) {
+                    const dir = target.minus(vector)
+                    this.dir = dir.dividedBy(dir)
+                }
+            }
+            return this.bounce(world, vector)
         },
     },
-})
+}).compose(Bounce)
 
-export default { Wall, Organism, Plant, Animal, Hunter, CanBounce, CanWander }
+export default { Wall, Organism, Plant, Animal, Bounce, Wander, Hunt }

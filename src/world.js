@@ -15,6 +15,12 @@ const VectorType = {
     minus(vector) {
         return Vector(this.x - vector.x, this.y - vector.y)
     },
+    dividedBy(vector) {
+        return Vector(
+            Math.ceil(this.x / vector.x),
+            Math.ceil(this.y / vector.y)
+        )
+    }
 }
 
 function Vector(x, y) {

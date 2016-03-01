@@ -17,7 +17,7 @@ function parseAnimal(config) {
 
     const mixins = [
         things.Animal,
-        things[`Can${upperFirst(strategy)}`],
+        things[upperFirst(strategy)],
     ]
 
     return stampit({
