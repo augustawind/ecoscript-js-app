@@ -135,8 +135,12 @@ const Hunt = stampit({
             for (const target of view) {
                 const thing = world.get(target)
                 if (thing && this.diet.includes(thing.name)) {
-                    const dir = target.minus(vector)
-                    this.dir = dir.dividedBy(dir)
+                    const distance = target.minus(vector)
+                    this.dir = distance.dir()
+                    console.log('FROM ', vector, ' ==> TO ', target)
+                    console.log('DISTANCE ', distance, ' ~~~ DIRECTION ', this.dir)
+                    console.log('\n')
+                    debugger
                 }
             }
             return this.bounce(world, vector)

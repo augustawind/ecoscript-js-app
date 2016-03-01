@@ -2,6 +2,15 @@ import inRange from 'lodash/inRange'
 import map from 'lodash/map'
 import range from 'lodash/range'
 
+function toDirection(n) {
+    if (n > 0)
+        return n / n
+    else if (n < 0)
+        return n / -n
+    else
+        return 0
+}
+
 const VectorType = {
     get x() {
         return this.x
@@ -15,12 +24,10 @@ const VectorType = {
     minus(vector) {
         return Vector(this.x - vector.x, this.y - vector.y)
     },
-    dividedBy(vector) {
-        return Vector(
-            Math.ceil(this.x / vector.x),
-            Math.ceil(this.y / vector.y)
-        )
+    dir() {
+        return Vector(toDirection(this.x), toDirection(this.y))
     }
+
 }
 
 function Vector(x, y) {
