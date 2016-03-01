@@ -53,7 +53,7 @@ function parseWorld(config) {
             return [key, organisms[val]]
         })
     )
-    legend.set('#', things.Wall)
+    legend.set('=', things.Wall)
     
     return World.fromLegend(legend, config.world.map)
 }

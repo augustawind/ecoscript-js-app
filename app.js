@@ -20,7 +20,7 @@ function animateWorld(world) {
         canvas.innerHTML = world.toString()
         world.turn()
     }
-    window.setInterval(step, 300)
+    window.setInterval(step, 500)
 }
 
 window.onload = () => {

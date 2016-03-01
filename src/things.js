@@ -7,7 +7,7 @@ import { directions } from './world'
 const Wall = stampit({
     refs: {
         name: 'wall',
-        image: '#',
+        image: '=',
         walkable: false,
     },
 })
@@ -140,7 +140,6 @@ const Hunt = stampit({
                     console.log('FROM ', vector, ' ==> TO ', target)
                     console.log('DISTANCE ', distance, ' ~~~ DIRECTION ', this.dir)
                     console.log('\n')
-                    debugger
                 }
             }
             return this.bounce(world, vector)
