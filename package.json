@@ -35,8 +35,8 @@
     ]
   },
   "scripts": {
-    "start": "watchify app.js --debug -v -t babelify -o www/app.js",
-    "build": "browserify -d -t babelify app.js -o www/app.js",
+    "start": "watchify app.js --debug -v -t babelify -o www/bundle.js",
+    "build": "browserify -d -t babelify app.js -o www/bundle.js",
     "lint": "eslint app.js src/*.js src/lib/*.js",
     "test": "babel-node spec/specRunner.js"
   }
