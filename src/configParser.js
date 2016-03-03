@@ -54,7 +54,7 @@ function parseWorld(config) {
     })
   )
   legend.set('=', things.Wall)
-  
+
   return World.fromLegend(legend, config.world.map)
 }
 

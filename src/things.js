@@ -143,7 +143,7 @@ const Hunt = stampit({
           const previousDistance = previous.minus(vector).map(Math.abs)
           const currentDistance = current.minus(vector).map(Math.abs)
           const result = currentDistance.compare(previousDistance)
-          return result === -1 ? current : previous 
+          return result === -1 ? current : previous
         })
 
         this.dir = closest.minus(vector).dir()
