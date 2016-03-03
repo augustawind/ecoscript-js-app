@@ -18,11 +18,13 @@
     "browserify": "13.0.0",
     "eslint": "2.2.0",
     "jasmine": "2.4.1",
+    "nodemon": "1.9.1",
     "watchify": "3.7.0"
   },
   "dependencies": {
     "babel-polyfill": "6.5.0",
     "express": "4.13.4",
+    "express-handlebars": "3.0.0",
     "lodash": "4.3.0",
     "stampit": "2.1.1"
   },
@@ -38,9 +40,11 @@
     "transform": "babelify"
   },
   "scripts": {
-    "start": "watchify app.js --debug -v -o www/bundle.js",
+    "start": "npm run start:client & npm run start:server",
+    "start:client": "watchify client/app.js -o public/bundle.js -dv",
+    "start:server": "nodemon --exec babel-node -- index.js",
     "build": "browserify -d -o www/bundle.js",
-    "lint": "eslint app.js src/*.js src/lib/*.js",
+    "lint": "eslint app.js src/*.js",
     "test": "babel-node spec/specRunner.js"
   }
 }

@@ -2,8 +2,8 @@ import forOwn from 'lodash/forOwn'
 import upperFirst from 'lodash/upperFirst'
 import stampit from 'stampit'
 
-import World from '../src/world'
-import things from '../src/things'
+import World from './world'
+import things from './things'
 
 function parsePlant(config) {
   return stampit({

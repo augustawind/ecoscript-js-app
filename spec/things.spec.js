@@ -1,7 +1,7 @@
 import stampit from 'stampit'
 
-import { World, Vector } from '../src/world'
-import t from '../src/things'
+import { World, Vector } from '../client/world'
+import t from '../client/things'
 
 describe('Organism', () => {
 

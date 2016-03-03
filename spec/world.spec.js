@@ -1,4 +1,4 @@
-import { World, Vector } from '../src/world'
+import { World, Vector } from '../client/world'
 
 describe('new Vector', () => {
 

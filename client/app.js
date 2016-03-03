@@ -1,6 +1,6 @@
 import random from 'lodash/random'
 
-import parseWorld from './src/configParser'
+import parseWorld from './configParser'
 
 function randomizeWorld(world) {
   for (const [_, thing] of world.enumerate()) {
@@ -25,7 +25,7 @@ function animateWorld(world) {
 
 window.onload = () => {
   const xhr = new XMLHttpRequest()
-  const url = '../src/defaultConfig.json'
+  const url = 'defaultConfig.json'
 
   xhr.onload = () => {
     const json = JSON.parse(xhr.responseText)
