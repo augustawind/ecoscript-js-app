@@ -18,10 +18,11 @@ const Organism = stampit({
   },
   init({ stamp, args }) {
     this.another = stamp
-
     let energy = this.baseEnergy
-    if (args[0] && 'energy' in args[0])
+
+    if (args[0] && 'energy' in args[0]) {
       energy = args[0].energy
+    }
 
     Reflect.defineProperty(this, 'energy', {
       get: () => energy,
@@ -32,12 +33,10 @@ const Organism = stampit({
   },
   methods: {
     reproduce(world, vector) {
-      if (this.energy < this.maxEnergy)
-        return false
+      if (this.energy < this.maxEnergy) return false
 
       const target = sample(world.viewWalkable(vector))
-      if (!target)
-        return false
+      if (!target) return false
 
       this.energy = this.baseEnergy
       world.set(target, this.another())
@@ -52,6 +51,7 @@ const Plant = stampit({
       this.energy += this.growthRate
       return true
     },
+
     preAct(world, vector) {
       return (
         this.reproduce(world, vector) ||
@@ -66,6 +66,7 @@ const Animal = stampit({
     eat(world, vector) {
       for (const target of world.view(vector)) {
         const thing = world.get(target)
+
         if (thing && this.diet.includes(thing.name)) {
           world.remove(target)
           this.energy += thing.energy
@@ -74,15 +75,16 @@ const Animal = stampit({
       }
       return false
     },
+
     metabolize(world, vector) {
       this.energy -= this.metabolism
 
-      if (this.energy > 0)
-        return false
+      if (this.energy > 0) return false
 
       world.remove(vector)
       return true
     },
+
     preAct(world, vector) {
       return (
         this.reproduce(world, vector) ||
@@ -94,16 +96,17 @@ const Animal = stampit({
 
 const Bounce = stampit({
   init() {
-    if (!this.dir)
-      this.dir = sample(directions)
+    this.dir = this.dir || sample(directions)
   },
+
   methods: {
     bounce(world, vector) {
       let dest = vector.plus(this.dir)
+
       if (!world.isWalkable(dest)) {
         dest = sample(world.viewWalkable(vector))
-        if (!dest)
-          return false
+        if (!dest) return false
+
         this.dir = dest.minus(vector)
       }
 
@@ -118,8 +121,7 @@ const Wander = stampit({
   methods: {
     wander(world, vector) {
       const dest = sample(world.viewWalkable(vector))
-      if (!dest)
-        return false
+      if (!dest) return false
 
       world.move(vector, dest)
       this.energy -= this.movementCost

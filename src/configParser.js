@@ -22,6 +22,7 @@ function parseAnimal(config) {
 
   return stampit({
     refs: config.properties,
+
     methods: {
       act(world, vector) {
         return (
@@ -31,17 +32,21 @@ function parseAnimal(config) {
         )
       }
     }
+
   }).compose(...mixins)
 }
 
 function parseOrganisms(config) {
   const organisms = Object.create(null)
+
   forOwn(config.plants, (val, key) => {
     organisms[key] = parsePlant(val)
   })
+
   forOwn(config.animals, (val, key) => {
     organisms[key] = parseAnimal(val)
   })
+
   return organisms
 }
 
@@ -53,6 +58,7 @@ function parseWorld(config) {
       return [key, organisms[val]]
     })
   )
+
   legend.set('=', things.Wall)
 
   return World.fromLegend(legend, config.world.map)
