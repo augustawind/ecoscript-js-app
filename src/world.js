@@ -5,10 +5,9 @@ import range from 'lodash/range'
 function toDirection(n) {
     if (n > 0)
         return n / n
-    else if (n < 0)
+    if (n < 0)
         return n / -n
-    else
-        return 0
+    return 0
 }
 
 const VectorType = {
@@ -26,8 +25,18 @@ const VectorType = {
     },
     dir() {
         return Vector(toDirection(this.x), toDirection(this.y))
-    }
+    },
+    compare(vector) {
+        const thisTotal = this.x + this.y
+        const otherTotal = vector.x + vector.y
 
+        if (thisTotal < otherTotal) return -1
+        if (thisTotal > otherTotal) return 1
+        return 0
+    },
+    map(f) {
+        return Vector(f(this.x), f(this.y))
+    },
 }
 
 function Vector(x, y) {
