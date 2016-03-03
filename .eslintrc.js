@@ -58,7 +58,7 @@ module.exports = {
         "default-case": 2,
         "dot-location": [
             2,
-            "object"
+            "property"
         ],
         "dot-notation": 2,
         "eol-last": 2,
