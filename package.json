@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "babel-polyfill": "6.5.0",
+    "express": "4.13.4",
     "lodash": "4.3.0",
     "stampit": "2.1.1"
   },
@@ -34,8 +35,8 @@
     ]
   },
   "scripts": {
-    "start": "watchify app.js --debug -v -t babelify -o dist/bundle.js",
-    "build": "browserify -d -t babelify app.js -o dist/bundle.js",
+    "start": "watchify app.js --debug -v -t babelify -o www/app.js",
+    "build": "browserify -d -t babelify app.js -o www/app.js",
     "lint": "eslint app.js src/*.js src/lib/*.js",
     "test": "babel-node spec/specRunner.js"
   }
