@@ -1,4 +1,5 @@
 import clamp from 'lodash/clamp'
+import isEqual from 'lodash/isEqual'
 import sample from 'lodash/sample'
 import stampit from 'stampit'
 
@@ -94,13 +95,13 @@ const Animal = stampit({
   }
 }).compose(Organism)
 
-const Bounce = stampit({
+const Go = stampit({
   init() {
     this.dir = this.dir || sample(directions)
   },
 
   methods: {
-    bounce(world, vector) {
+    go(world, vector) {
       let dest = vector.plus(this.dir)
 
       if (!world.isWalkable(dest)) {
@@ -130,6 +131,41 @@ const Wander = stampit({
   },
 })
 
+function closestTo(origin, vectors) {
+  return vectors.reduce((previous, current) => {
+    const previousDistance = previous.minus(origin).map(Math.abs)
+    const currentDistance = current.minus(origin).map(Math.abs)
+    const result = currentDistance.compare(previousDistance)
+    return result === -1 ? current : previous
+  })
+}
+
+const Herd = stampit({
+  methods: {
+    herd(world, vector) {
+      const view = world.view(vector, this.senseRadius)
+
+      const flock = view.filter(target => {
+        const thing = world.get(target)
+        return thing && this.name === thing.name
+      })
+
+      if (flock.length) {
+        const closest = closestTo(vector, flock)
+        const distance = closest.minus(vector)
+        const dir = distance.dir()
+
+        // if closest flock member is not adjacent, go towards it
+        if (!isEqual(distance, dir)) {
+          this.dir = dir
+        }
+      }
+
+      return this.go(world, vector)
+    }
+  }
+}).compose(Go)
+
 const Hunt = stampit({
   methods: {
     hunt(world, vector) {
@@ -141,19 +177,13 @@ const Hunt = stampit({
       })
 
       if (prey.length) {
-        const closest = prey.reduce((previous, current) => {
-          const previousDistance = previous.minus(vector).map(Math.abs)
-          const currentDistance = current.minus(vector).map(Math.abs)
-          const result = currentDistance.compare(previousDistance)
-          return result === -1 ? current : previous
-        })
-
+        const closest = closestTo(vector, prey)
         this.dir = closest.minus(vector).dir()
       }
 
-      return this.bounce(world, vector)
+      return this.go(world, vector)
     },
   },
-}).compose(Bounce)
+}).compose(Go)
 
-export default { Wall, Organism, Plant, Animal, Bounce, Wander, Hunt }
+export default { Wall, Organism, Plant, Animal, Go, Wander, Hunt, Herd }
