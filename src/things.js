@@ -132,16 +132,23 @@ const Hunt = stampit({
     methods: {
         hunt(world, vector) {
             const view = world.view(vector, this.senseRadius)
-            for (const target of view) {
+
+            const prey = view.filter(target => {
                 const thing = world.get(target)
-                if (thing && this.diet.includes(thing.name)) {
-                    const distance = target.minus(vector)
-                    this.dir = distance.dir()
-                    console.log('FROM ', vector, ' ==> TO ', target)
-                    console.log('DISTANCE ', distance, ' ~~~ DIRECTION ', this.dir)
-                    console.log('\n')
-                }
+                return thing && this.diet.includes(thing.name)
+            })
+
+            if (prey.length) {
+                const closest = prey.reduce((previous, current) => {
+                    const previousDistance = previous.minus(vector).map(Math.abs)
+                    const currentDistance = current.minus(vector).map(Math.abs)
+                    const result = currentDistance.compare(previousDistance)
+                    return result === -1 ? current : previous 
+                })
+
+                this.dir = closest.minus(vector).dir()
             }
+
             return this.bounce(world, vector)
         },
     },
