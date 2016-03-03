@@ -12,10 +12,6 @@
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "6.5.1",
-    "babel-plugin-transform-object-rest-spread": "6.5.0",
-    "babel-preset-es2015": "6.5.0",
-    "babelify": "7.2.0",
-    "browserify": "13.0.0",
     "eslint": "2.2.0",
     "jasmine": "2.4.1",
     "nodemon": "1.9.1",
@@ -23,6 +19,10 @@
   },
   "dependencies": {
     "babel-polyfill": "6.5.0",
+    "babel-plugin-transform-object-rest-spread": "6.5.0",
+    "babel-preset-es2015": "6.5.0",
+    "babelify": "7.2.0",
+    "browserify": "13.0.0",
     "express": "4.13.4",
     "express-handlebars": "3.0.0",
     "lodash": "4.3.0",
@@ -40,13 +40,14 @@
     "transform": "babelify"
   },
   "scripts": {
-    "watch": "npm run watch:client & npm run watch:server",
-    "watch:client": "watchify client/app.js -o public/bundle.js -dv",
-    "watch:server": "nodemon --exec babel-node -- index.js",
+    "postinstall": "npm run build",
     "build": "npm run build:client && npm run build:server",
     "build:client": "browserify client/app.js -o public/bundle.js -dv",
     "build:server": "babel server/index.js -o index.js",
     "lint": "eslint app.js src/*.js",
-    "test": "babel-node spec/specRunner.js"
+    "test": "babel-node spec/specRunner.js",
+    "watch": "npm run watch:client & npm run watch:server",
+    "watch:client": "watchify client/app.js -o public/bundle.js -dv",
+    "watch:server": "nodemon --exec babel-node -- index.js"
   }
 }
