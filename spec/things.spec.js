@@ -44,9 +44,9 @@ describe('Organism', () => {
       [null, null, null],
     ])
 
-    org.reproduce(world, Vector(1, 1))
+    org.reproduce(world, new Vector(1, 1))
 
-    const orgs = world.view(Vector(1, 1))
+    const orgs = world.view(new Vector(1, 1))
                       .map(vector => world.get(vector))
                       .filter(th => th !== null)
     const baby = orgs[0]
@@ -61,7 +61,7 @@ describe('Organism', () => {
       expect(baby.energy).toBe(org.baseEnergy)
     })
     it('should not remove the parent organism', () => {
-      expect(world.get(Vector(1, 1))).toBe(org)
+      expect(world.get(new Vector(1, 1))).toBe(org)
     })
   })
 })
@@ -74,7 +74,7 @@ describe('Plant', () => {
     const other = t.Plant({ baseEnergy: 4, maxEnergy: 11, growthRate: 5 })
     const world = new World([[plant, other]])
     
-    plant.grow(world, Vector(1, 0))
+    plant.grow(world, new Vector(1, 0))
 
     it("should increment the plant's energy by its growthRate", () => {
       expect(plant.energy).toBe(19)
@@ -111,8 +111,8 @@ describe('Animal', () => {
       [null, predator, null],
       [null, null, prey2],
     ])
-    predator.eat(world, Vector(1, 1))
-    const things = world.view(Vector(1, 1))
+    predator.eat(world, new Vector(1, 1))
+    const things = world.view(new Vector(1, 1))
                         .map(v => world.get(v))
                         .filter(th => th !== null)
 
@@ -140,7 +140,7 @@ describe('Wander', () => {
         [null, null, null, null],
         [null, null, wanderer, null],
       ])
-      const vector = Vector(2, 3)
+      const vector = new Vector(2, 3)
 
       expect(world.get(vector)).toBe(wanderer)
 
@@ -164,7 +164,7 @@ describe('Bounce', () => {
         [null, null, null, null],
         [null, null, null, null],
       ])
-      const vector = Vector(1, 1)
+      const vector = new Vector(1, 1)
 
       expect(world.get(vector)).toBe(thing)
 

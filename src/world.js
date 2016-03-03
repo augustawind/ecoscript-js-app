@@ -3,32 +3,42 @@ import map from 'lodash/map'
 import range from 'lodash/range'
 
 function toDirection(n) {
-  if (n > 0)
-    return n / n
-  if (n < 0)
-    return n / -n
+  if (n > 0) return n / n
+  if (n < 0) return n / -n
   return 0
 }
 
-const VectorType = {
+class Vector {
+
+  constructor(x, y) {
+    this._x = x
+    this._y = y
+  }
+
   get x() {
-    return this.x
-  },
+    return this._x
+  }
+
   get y() {
-    return this.y
-  },
+    return this._y
+  }
+
   plus(vector) {
-    return Vector(this.x + vector.x, this.y + vector.y)
-  },
+    return new Vector(this.x + vector.x, this.y + vector.y)
+  }
+
   minus(vector) {
-    return Vector(this.x - vector.x, this.y - vector.y)
-  },
+    return new Vector(this.x - vector.x, this.y - vector.y)
+  }
+
   dir() {
-    return Vector(toDirection(this.x), toDirection(this.y))
-  },
+    return new Vector(toDirection(this.x), toDirection(this.y))
+  }
+
   map(f) {
-    return Vector(f(this.x), f(this.y))
-  },
+    return new Vector(f(this.x), f(this.y))
+  }
+
   compare(vector) {
     const thisTotal = this.x + this.y
     const otherTotal = vector.x + vector.y
@@ -39,23 +49,15 @@ const VectorType = {
   }
 }
 
-function Vector(x, y) {
-  return {
-    __proto__: VectorType,
-    x,
-    y,
-  }
-}
-
 const directions = [
-  Vector(0, -1),
-  Vector(1, -1),
-  Vector(1, 0),
-  Vector(1, 1),
-  Vector(0, 1),
-  Vector(-1, 1),
-  Vector(-1, 0),
-  Vector(-1, -1),
+  new Vector(0, -1),
+  new Vector(1, -1),
+  new Vector(1, 0),
+  new Vector(1, 1),
+  new Vector(0, 1),
+  new Vector(-1, 1),
+  new Vector(-1, 0),
+  new Vector(-1, -1),
 ]
 
 class World {
@@ -87,7 +89,7 @@ class World {
     const things = []
     for (const [y, row] of this.things.entries()) {
       for (const [x, thing] of row.entries()) {
-        things.push([Vector(x, y), thing])
+        things.push([new Vector(x, y), thing])
       }
     }
     return things
@@ -118,7 +120,7 @@ class World {
     _range.forEach(dx => {
       _range.forEach(dy => {
         if (dx !== 0 || dy !== 0)
-          vectors.push(origin.plus(Vector(dx, dy)))
+          vectors.push(origin.plus(new Vector(dx, dy)))
       })
     })
 
