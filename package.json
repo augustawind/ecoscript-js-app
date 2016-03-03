@@ -40,7 +40,6 @@
     "transform": "babelify"
   },
   "scripts": {
-    "start": "node index.js",
     "watch": "npm run watch:client & npm run watch:server",
     "watch:client": "watchify client/app.js -o public/bundle.js -dv",
     "watch:server": "nodemon --exec babel-node -- index.js",
