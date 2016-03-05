@@ -157,7 +157,7 @@ describe('Go', () => {
 
   it('should only move the thing 1 space', () => {
     for (let i = 0; i < 20; i++) {
-      const thing = t.Go.compose(t.Animal)()
+      const thing = t.Go({ dir: new Vector(1, 0) })
       const world = new World([
         [null, null, null, null],
         [null, thing, null, null],
