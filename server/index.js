@@ -1,6 +1,7 @@
 import path from 'path'
+
 import express from 'express'
-import handlebars from 'express-handlebars'
+import markedejs from 'markedejs'
 
 const app = express()
 
@@ -10,12 +11,16 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/scripts',
   express.static(path.join(__dirname, '/node_modules/babel-polyfill/dist/')))
 
-app.engine('html', handlebars({ extname: 'html' }))
-app.set('view engine', 'html')
+app.engine('md', markedejs.__express)
+app.set('view engine', 'md')
 app.set('views', path.join(__dirname, '/views'))
 
 app.get('/', (request, response) => {
   response.render('index')
+})
+
+app.get('/guide', (request, response) => {
+  response.render('guide')
 })
 
 app.listen(app.get('port'), () => {
