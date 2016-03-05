@@ -80,7 +80,10 @@ module.exports = {
         "id-match": 2,
         "indent": [
             2,
-            2
+            2,
+            {
+              "SwitchCase": 1
+            }
         ],
         "init-declarations": 2,
         "jsx-quotes": 2,
@@ -166,7 +169,7 @@ module.exports = {
         "no-sync": 2,
         "no-ternary": 0,
         "no-throw-literal": 2,
-        "no-trailing-spaces": 2,
+        "no-trailing-spaces": 0,
         "no-undef-init": 2,
         "no-undefined": 2,
         "no-underscore-dangle": 0,
