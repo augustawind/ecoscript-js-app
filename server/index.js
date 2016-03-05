@@ -23,6 +23,10 @@ app.get('/guide', (request, response) => {
   response.render('guide')
 })
 
+app.get('/example', (request, response) => {
+  response.download(path.join('public', 'example.json'))
+})
+
 app.listen(app.get('port'), () => {
   console.log('Node app is running on port', app.get('port'))
 })
