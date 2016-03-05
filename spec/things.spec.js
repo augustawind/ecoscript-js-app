@@ -101,11 +101,11 @@ describe('Animal', () => {
 
   describe('#eat', () => {
 
-    const predator = t.Animal({ name: 'predator', baseEnergy: 5, maxEnergy: 20, diet: ['prey'] })
-    const Prey = () => t.Animal({ name: 'prey', baseEnergy: 3, maxEnergy: 20 })
+    const predator = t.Animal({ species: 'predator', baseEnergy: 5, maxEnergy: 20, diet: ['prey'] })
+    const Prey = () => t.Animal({ species: 'prey', baseEnergy: 3, maxEnergy: 20 })
     const prey1 = Prey()
     const prey2 = Prey()
-    const other = () => t.Animal({ name: 'other', baseEnergy: 5, maxEnergy: 20 })
+    const other = () => t.Animal({ species: 'other', baseEnergy: 5, maxEnergy: 20 })
     const world = new World([
       [prey1, null, other],
       [null, predator, null],
@@ -120,7 +120,7 @@ describe('Animal', () => {
       expect(things.length).toBe(2)
     })
     it("should only remove an organism that is in the Animal's diet", () => {
-      const prey = things.filter(th => th.name === 'prey')
+      const prey = things.filter(th => th.species === 'prey')
       expect(prey.length).toBe(1)
     })
     it("should add the eaten's energy to the eater's energy", () => {
@@ -157,7 +157,7 @@ describe('Go', () => {
 
   it('should only move the thing 1 space', () => {
     for (let i = 0; i < 20; i++) {
-      const thing = t.Go()
+      const thing = t.Go.compose(t.Animal)()
       const world = new World([
         [null, null, null, null],
         [null, thing, null, null],
@@ -168,7 +168,7 @@ describe('Go', () => {
 
       expect(world.get(vector)).toBe(thing)
 
-      thing.bounce(world, vector)
+      thing.go(world, vector)
 
       const view = world.view(vector)
       const thingView = view.map(v => world.get(v))

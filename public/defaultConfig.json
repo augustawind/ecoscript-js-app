@@ -31,7 +31,7 @@
     "Shrub": {
       "type": "plant",
       "properties": {
-        "name": "shrub",
+        "species": "shrub",
         "image": "*",
         "baseEnergy": 3,
         "maxEnergy": 20,
@@ -41,7 +41,7 @@
     "Herbivore": {
       "type": "animal",
       "properties": {
-        "name": "herbivore",
+        "species": "herbivore",
         "image": "H",
         "baseEnergy": 30,
         "maxEnergy": 80,
@@ -59,7 +59,7 @@
     "Predator": {
       "type": "animal",
       "properties": {
-        "name": "predator",
+        "species": "predator",
         "image": "@",
         "baseEnergy": 30,
         "maxEnergy": 90,
