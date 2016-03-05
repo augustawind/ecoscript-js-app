@@ -1,109 +1,79 @@
 {
-    "world": {
-        "legend": [
-            ["*", "Shrub"],
-            ["H", "Herbivore"],
-            ["@", "Predator"]
-        ],
-        "map": [
-            "====================================================",
-            "=                 ====                   *****   ===",
-            "=   H*    ==                 ========      H     *==",
-            "=  ****  ==                                       *=",
-            "=   **  ==       ***           *   ==========      =",
-            "=      ==       *    **  H    ***                  =",
-            "=      = *     *     *         *                   =",
-            "=      = *    H*                                  *=",
-            "=     ==     *  H        @   H                ======",
-            "=           ***                               =    =",
-            "=            *                 *                   =",
-            "===            *   H     H    ***                  =",
-            "=           ****   **          *                   =",
-            "=     *   ==  ==  ==  ==               ===         =",
-            "=    **        =                      =====        =",
-            "==    *        =  =                    ===         =",
-            "===               =                                =",
-            "===================================================="
-        ],
-        "amap": [
-            "==========",
-            "==========",
-            "==========",
-            "==========",
-            "==========",
-            "==========",
-            "==========",
-            "==========",
-            "==========",
-            "=========="
-        ],
-        "bmap": [
-            "====================================================",
-            "=                 ====         ****              ===",
-            "=   *  @  ==                 ========       HH    ==",
-            "=   *    ==        H H                 ****       *=",
-            "=       ==*                        ==========     *=",
-            "=      ==***  *         ****                     **=",
-            "=* **  =  *  ***      =========                  **=",
-            "=* **  =      *               =   *              **=",
-            "=     ==              =   H   =  ***          ======",
-            "=*            @       =       =   *        H  =    =",
-            "=*                    =  ======                 ** =",
-            "===          ****          ***                  ** =",
-            "=       H                        @         H       =",
-            "=   *     ==  ==  ==  ==               ===      *  =",
-            "=   **         =              *       =====  H     =",
-            "==  **  H   H  =  =    ***  ***        ===      ** =",
-            "===               =   *****                    ****=",
-            "===================================================="
-        ]
+  "world": {
+    "legend": [
+      ["=", "Wall"],
+      ["*", "Shrub"],
+      ["H", "Herbivore"],
+      ["@", "Predator"]
+    ],
+    "map": [
+      "====================================================",
+      "=                 ====                   *****   ===",
+      "=   H*    ==                 ========      H     *==",
+      "=  ****  ==                                       *=",
+      "=   **  ==       ***           *   ==========      =",
+      "=      ==       *    **  H    ***                  =",
+      "=      = *     *     *         *                   =",
+      "=      = *    H*                                  *=",
+      "=     ==     *  H        @   H                ======",
+      "=           ***                               =    =",
+      "=            *                 *                   =",
+      "===            *   H     H    ***                  =",
+      "=           ****   **          *                   =",
+      "=     *   ==  ==  ==  ==               ===         =",
+      "=    **        =                      =====        =",
+      "==    *        =  =                    ===         =",
+      "===               =                                =",
+      "===================================================="
+    ]
+  },
+  "things": {
+    "Shrub": {
+      "type": "plant",
+      "properties": {
+        "name": "shrub",
+        "image": "*",
+        "baseEnergy": 3,
+        "maxEnergy": 20,
+        "growthRate": 0.8
+      }
     },
-    "plants": {
-        "Shrub": {
-            "properties": {
-                "name": "shrub",
-                "image": "*",
-                "baseEnergy": 3,
-                "maxEnergy": 20,
-                "growthRate": 0.8
-            }
+    "Herbivore": {
+      "type": "animal",
+      "properties": {
+        "name": "herbivore",
+        "image": "H",
+        "baseEnergy": 30,
+        "maxEnergy": 80,
+        "movementCost": 0.8,
+        "metabolism": 0.2,
+        "senseRadius": 5,
+        "diet": ["shrub"]
+      },
+      "actions": {
+        "move": {
+          "strategy": "herd"
         }
+      }
     },
-    "animals": {
-        "Herbivore": {
-            "properties": {
-                "name": "herbivore",
-                "image": "H",
-                "baseEnergy": 30,
-                "maxEnergy": 80,
-                "movementCost": 0.8,
-                "metabolism": 0.2,
-                "senseRadius": 5,
-                "diet": ["shrub"]
-            },
-            "actions": {
-                "move": {
-                    "strategy": "herd"
-                }
-            }
-        },
-        "Predator": {
-            "properties": {
-                "name": "predator",
-                "image": "@",
-                "baseEnergy": 30,
-                "maxEnergy": 90,
-                "movementCost": 0.8,
-                "metabolism": 0.2,
-                "senseRadius": 5,
-                "diet": ["herbivore"]
-            },
-            "actions": {
-                "move": {
-                    "strategy": "hunt",
-                    "condition": "this.energy < 10"
-                }
-            }
+    "Predator": {
+      "type": "animal",
+      "properties": {
+        "name": "predator",
+        "image": "@",
+        "baseEnergy": 30,
+        "maxEnergy": 90,
+        "movementCost": 0.8,
+        "metabolism": 0.2,
+        "senseRadius": 5,
+        "diet": ["herbivore"]
+      },
+      "actions": {
+        "move": {
+          "strategy": "hunt",
+          "condition": "this.energy < 10"
         }
+      }
     }
+  }
 }
