@@ -61,7 +61,7 @@
     "plants": {
         "Shrub": {
             "properties": {
-                "name": "plant",
+                "name": "shrub",
                 "image": "*",
                 "baseEnergy": 3,
                 "maxEnergy": 20,
@@ -79,7 +79,7 @@
                 "movementCost": 0.8,
                 "metabolism": 0.2,
                 "senseRadius": 5,
-                "diet": ["plant"]
+                "diet": ["shrub"]
             },
             "actions": {
                 "move": {
