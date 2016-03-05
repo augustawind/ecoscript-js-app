@@ -48,6 +48,7 @@
     "test": "babel-node spec/specRunner.js",
     "watch": "npm run watch:client & npm run watch:server",
     "watch:client": "watchify client/app.js -o public/bundle.js -dv",
-    "watch:server": "nodemon --exec babel-node -- index.js"
+    "watch:server": "babel server/index.js -o index.js --watch",
+    "start": "npm run watch & nodemon"
   }
 }
