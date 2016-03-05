@@ -46,7 +46,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "browserify client/app.js -o public/bundle.js -dv",
     "build:server": "babel server/index.js -o index.js",
-    "lint": "eslint app.js src/*.js",
+    "lint": "eslint server/*.js client/*.js",
     "test": "babel-node spec/specRunner.js",
     "watch": "npm run watch:client & npm run watch:server",
     "watch:client": "watchify client/app.js -o public/bundle.js -dv",
