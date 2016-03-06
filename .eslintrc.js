@@ -166,7 +166,7 @@ module.exports = {
         "no-shadow": 2,
         "no-shadow-restricted-names": 2,
         "no-spaced-func": 2,
-        "no-sync": 2,
+        "no-sync": 0,
         "no-ternary": 0,
         "no-throw-literal": 2,
         "no-trailing-spaces": 0,
