@@ -138,123 +138,123 @@ describe('World', () => {
   beforeEach(() => {
     things = [
       [makeThing('a', true ), makeThing('b', false)],
-  [null   , makeThing('d', true )],
-  [makeThing('e', false), null   ],
-  ]
-  world = new World(things)
+      [null   , makeThing('d', true )],
+      [makeThing('e', false), null   ],
+    ]
+    world = new World(things)
   })
 
   it('should provide an accurate string representation', () => {
-  const expected = [
-  'ab',
-  ' d',
-  'e ',
-  ].join('\n')
+    const expected = [
+      'ab',
+      ' d',
+      'e ',
+    ].join('\n')
 
-  expect(world.toString()).toBe(expected)
+    expect(world.toString()).toBe(expected)
   })
 
   it('should let you get and set things by vector', () => {
-  const a = new Vector(0, 0)
-  const d = new Vector(1, 1)
-  const e = new Vector(0, 2)
+    const a = new Vector(0, 0)
+    const d = new Vector(1, 1)
+    const e = new Vector(0, 2)
 
-  expect(world.get(a).name).toBe('a')
-  expect(world.get(d).name).toBe('d')
-  expect(world.get(e).name).toBe('e')
+    expect(world.get(a).name).toBe('a')
+    expect(world.get(d).name).toBe('d')
+    expect(world.get(e).name).toBe('e')
 
-  world.set(a, makeThing('new a'))
-  world.set(d, makeThing('new d'))
+    world.set(a, makeThing('new a'))
+    world.set(d, makeThing('new d'))
 
-  expect(world.get(a).name).toBe('new a')
-  expect(world.get(d).name).toBe('new d')
-  expect(world.get(e).name).toBe('e')
+    expect(world.get(a).name).toBe('new a')
+    expect(world.get(d).name).toBe('new d')
+    expect(world.get(e).name).toBe('e')
   })
 
   it('should let you move things from one vector to another', () => {
-  const a = new Vector(0, 0)
-  const d = new Vector(1, 1)
+    const a = new Vector(0, 0)
+    const d = new Vector(1, 1)
 
-  expect(world.get(a).name).toBe('a')
-  expect(world.get(d).name).toBe('d')
+    expect(world.get(a).name).toBe('a')
+    expect(world.get(d).name).toBe('d')
 
-  world.move(a, d)
+    world.move(a, d)
 
-  expect(world.get(a)).toBeNull()
-  expect(world.get(d).name).toBe('a')
+    expect(world.get(a)).toBeNull()
+    expect(world.get(d).name).toBe('a')
   })
 
   it('should let you remove things by vector', () => {
-  const a = new Vector(0, 0)
-  const b = new Vector(1, 0)
+    const a = new Vector(0, 0)
+    const b = new Vector(1, 0)
 
-  expect(world.get(a).name).toBe('a')
-  expect(world.get(b).name).toBe('b')
+    expect(world.get(a).name).toBe('a')
+    expect(world.get(b).name).toBe('b')
 
-  world.remove(a)
+    world.remove(a)
 
-  expect(world.get(a)).toBeNull()
-  expect(world.get(b).name).toBe('b')
+    expect(world.get(a)).toBeNull()
+    expect(world.get(b).name).toBe('b')
   })
 
   it('should tell you whether a vector is in bounds', () => {
-  expect(world.inBounds(new Vector(2, 0))).toBe(false)
-  expect(world.inBounds(new Vector(0, 3))).toBe(false)
-  expect(world.inBounds(new Vector(-1, 0))).toBe(false)
-  expect(world.inBounds(new Vector(0, -1))).toBe(false)
-  expect(world.inBounds(new Vector(-1, 4))).toBe(false)
+    expect(world.inBounds(new Vector(2, 0))).toBe(false)
+    expect(world.inBounds(new Vector(0, 3))).toBe(false)
+    expect(world.inBounds(new Vector(-1, 0))).toBe(false)
+    expect(world.inBounds(new Vector(0, -1))).toBe(false)
+    expect(world.inBounds(new Vector(-1, 4))).toBe(false)
   })
 
   describe('#enumerate', () => {
   
-  it('should return an array of [vector, thing] pairs', () => {
-   const enumerated = world.enumerate() 
+    it('should return an array of [vector, thing] pairs', () => {
+      const enumerated = world.enumerate() 
 
-   things.forEach((row, y) => {
-   row.forEach((thing, x) => {
-     expect(enumerated).toContain([new Vector(x, y), thing])
-   })
-   })
-  })
+      things.forEach((row, y) => {
+        row.forEach((thing, x) => {
+          expect(enumerated).toContain({ vector: new Vector(x, y), thing })
+        })
+      })
+    })
   })
 
   describe('#isWalkable', () => {
 
-  const a = new Vector(0, 0)
-  const b = new Vector(1, 0)
-  const c = new Vector(0, 1)
-  const d = new Vector(1, 1)
-  const e = new Vector(0, 2)
-  const f = new Vector(1, 2)
+    const a = new Vector(0, 0)
+    const b = new Vector(1, 0)
+    const c = new Vector(0, 1)
+    const d = new Vector(1, 1)
+    const e = new Vector(0, 2)
+    const f = new Vector(1, 2)
 
-  const x = new Vector(2, 0)
-  const y = new Vector(0, 3)
+    const x = new Vector(2, 0)
+    const y = new Vector(0, 3)
 
-  it('should tell you whether a thing at a vector is walkable', () => {
-  expect(world.isWalkable(a)).toBe(true)
-  expect(world.isWalkable(b)).toBe(false)
-  })
+    it('should tell you whether a thing at a vector is walkable', () => {
+      expect(world.isWalkable(a)).toBe(true)
+      expect(world.isWalkable(b)).toBe(false)
+    })
 
-  it('should tell you whether a vector is within the bounds of the world', () => {
-  expect(world.isWalkable(x)).toBe(false)
-  expect(world.isWalkable(y)).toBe(false)
-  })
+    it('should tell you whether a vector is within the bounds of the world', () => {
+      expect(world.isWalkable(x)).toBe(false)
+      expect(world.isWalkable(y)).toBe(false)
+    })
 
-  it('should return `true` if there is nothing at the given vector', () => {
-  expect(world.isWalkable(c)).toBe(true)
-  expect(world.isWalkable(f)).toBe(true)
-  })
+    it('should return `true` if there is nothing at the given vector', () => {
+      expect(world.isWalkable(c)).toBe(true)
+      expect(world.isWalkable(f)).toBe(true)
+    })
   })
 
   describe('#view', () => {
 
-  beforeEach(() => {
-  world = new World([
-  [makeThing('a', true, 0), makeThing('b', true), makeThing('c', true)],
-  [makeThing('d', false), makeThing('e', true, 0), makeThing('f', false)],
-  [makeThing('g', true), makeThing('h', false), makeThing('i', true)],
-  ])
-  })
+    beforeEach(() => {
+      world = new World([
+        [makeThing('a', true, 0), makeThing('b', true), makeThing('c', true)],
+        [makeThing('d', false), makeThing('e', true, 0), makeThing('f', false)],
+        [makeThing('g', true), makeThing('h', false), makeThing('i', true)],
+      ])
+    })
 
     it('should return a list of vectors that surround the given vector', () => {
       const view = world.view(new Vector(1, 1))
