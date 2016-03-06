@@ -16,7 +16,14 @@
         line-height: 15px;
         font-size: 18px;
         font-family: "Joystix", monospace;
-        width: min-content;
+        display: table;
+      }
+      footer {
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      .content {
+        padding: 10px 0;
       }
     </style>
 
@@ -28,11 +35,17 @@
   <body>
     <div class="container">
 
-      <div class="row">
+      <div class="content row">
         <div class="col-md-8 col-offset-2">
           <%= markdown %>
         </div>
       </div>
+
+      <footer class="row">
+        <div class="col-md-8 col-offset-2">
+          &copy; 2016 Dustin Rohde
+        </div>
+      </footer>
 
     </div>
   </body>

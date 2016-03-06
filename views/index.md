@@ -1,3 +1,5 @@
+[Go to Editor's Guide](guide)
+
 # Ecosystem simulator
 
 Below is a simulation of a simple ecosystem.
@@ -20,7 +22,7 @@ If you watch long enough, you'll notice there's one big problem with this
 world - it's completely unbalanced. Often within 5 minutes, all but one
 species gets wiped out, and that's no fun, nor is it realistic.
 
-That's where you come in. Read [the Ecosystem Editor's Guide](guide) to learn
+That's where you come in. Read [the guide](guide) to learn
 how you can create a balanced ecosystem by editing simple text files.
 
 The fate of this virtual world is in your hands! 
