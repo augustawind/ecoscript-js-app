@@ -50,11 +50,7 @@
         "senseRadius": 5,
         "diet": ["shrub"]
       },
-      "actions": {
-        "move": {
-          "strategy": "herd"
-        }
-      }
+      "actions": ["hunt", "herd", "go"]
     },
     "Predator": {
       "type": "animal",
@@ -68,12 +64,7 @@
         "senseRadius": 5,
         "diet": ["herbivore"]
       },
-      "actions": {
-        "move": {
-          "strategy": "hunt",
-          "condition": "this.energy < 10"
-        }
-      }
+      "actions": ["hunt", "go"]
     }
   }
 }
