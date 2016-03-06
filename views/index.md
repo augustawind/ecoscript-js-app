@@ -1,32 +1,26 @@
-<!doctype html>
-<html>
+# Ecosystem simulator
 
-  <head>
-    <meta charset="utf-8">
-    <title>Ecosystem simulator</title>
+Below is a simulation of a simple ecosystem.
 
-    <style>
-      @font-face {
-        font-family: "Joystix";
-        src: url("joystix.woff") format("woff");
-      }
-      body {
-        background-color: black;
-        color: white;
-      }
-      pre {
-        line-height: 15px;
-        font-size: 18px;
-        font-family: "Joystix", monospace;
-      }
-    </style>
+<pre id="ecosystem"></pre>
 
-    <script src="scripts/polyfill.min.js">
-    </script>
-    <script src="bundle.js"></script>
-  </head>
+It contains the following:
 
-  <body>
-  </body>
+  - **@** are predators
+  - **H** are herbivores
+  - **\*** are plants
 
-</html>
+Everything is fighting for survival. The predators hunt the herbivores, and
+the herbivores eat the plants. Watch how the herbivores form herds and run to
+escape the predators. Everything reproduces and creates more of itself, given
+enough time. Refresh the page to see it happen again. It's different every
+time.
+
+If you watch long enough, you'll notice there's one big problem with this
+world - it's completely unbalanced. That's where you come in. Read [the
+guide](guide) to learn how you can create a balanced ecosystem by editing
+simple text files.
+
+The fate of this virtual world is in your hands! 
+
+[Click here to read the Ecosystem Editor's Guide](guide)

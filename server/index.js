@@ -1,28 +1,37 @@
 import path from 'path'
 
 import express from 'express'
-import markedejs from 'markedejs'
+import markdownRouter from 'express-markdown-router'
+import consolidate from 'consolidate'
 
 const app = express()
 
 app.set('port', process.env.PORT || 5000)
 
+// Markdown middleware
+app.use(markdownRouter(path.join(__dirname, 'views')))
+
+// Static file server
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/scripts',
   express.static(path.join(__dirname, '/node_modules/babel-polyfill/dist/')))
 
-app.engine('md', markedejs.__express)
-app.set('view engine', 'md')
+// Lodash templates
+app.engine('html', consolidate.lodash)
+app.set('view engine', 'html')
 app.set('views', path.join(__dirname, '/views'))
 
+// Index
 app.get('/', (request, response) => {
   response.render('index')
 })
 
+// Editor's guide
 app.get('/guide', (request, response) => {
   response.render('guide')
 })
 
+// example.json
 app.get('/example', (request, response) => {
   response.download(path.join('public', 'example.json'))
 })
