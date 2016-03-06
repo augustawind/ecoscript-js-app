@@ -26,13 +26,15 @@ app.get('/', (request, response) => {
   response.render('index')
 })
 
-// Editor's guide
-app.get('/guide', (request, response) => {
-  response.render('guide')
+// Watch page
+app.get('/play', (request, response) => {
+  response.render('play')
 })
+
 
 // example.json
 app.get('/example', (request, response) => {
+  response.set('Content-Type', 'application/json')
   response.download(path.join('public', 'example.json'))
 })
 
