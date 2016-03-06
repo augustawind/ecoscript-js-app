@@ -1,3 +1,5 @@
+[Back to home](/)
+
 # Creating your own ecosystem 
 
 Creating your own ecosystem is easy and requires no programming experience.
@@ -79,3 +81,5 @@ can be any type of JSON value, including objects and more arrays. Values are
 separated by commas, and the whole array must be enclosed in square brackets:
 
     "things": ["ball", "tree", "car"]
+
+[Back to home](/)

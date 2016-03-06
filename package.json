@@ -52,6 +52,7 @@
     "watch": "npm run watch:client & npm run watch:server",
     "watch:client": "watchify client/app.js -o public/bundle.js -dv",
     "watch:server": "babel server/index.js -o index.js --watch",
+    "prestart": "npm run build",
     "start": "npm run watch & nodemon"
   }
 }

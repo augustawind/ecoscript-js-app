@@ -5,19 +5,18 @@
     <meta charset="utf-8">
     <title>Ecosystem simulator</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
     <style>
       @font-face {
         font-family: "Joystix";
-        src: url("joystix.woff") format("woff");
+        src: url("joystix.ttf") format("ttf");
       }
-      body {
-        background-color: black;
-        color: white;
-      }
-      pre {
+      #ecosystem {
         line-height: 15px;
         font-size: 18px;
         font-family: "Joystix", monospace;
+        width: min-content;
       }
     </style>
 
@@ -27,7 +26,15 @@
   </head>
 
   <body>
-    <%= markdown %>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-8 col-offset-2">
+          <%= markdown %>
+        </div>
+      </div>
+
+    </div>
   </body>
 
 </html>
