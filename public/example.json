@@ -1,13 +1,14 @@
 {
   "app": {
-    "timeout": 200
+    "timeout": 500 
   },
   "world": {
     "legend": [
       ["=", "Wall"],
       ["*", "Shrub"],
       ["H", "Herbivore"],
-      ["@", "Predator"]
+      ["@", "Predator"],
+      ["O", "Nomnivore"]
     ],
     "xmap": [
       "============",
@@ -37,6 +38,19 @@
       "=            *    H           *      **** =",
       "===            *  H     H    ***      *** =",
       "=           ****  ** @        *         * =",
+      "=     *   ==  ==  =  ==           =     * =",
+      "=    **        =          ***    ===      =",
+      "==    *        =        *******   =       =",
+      "===                       ***             =",
+      "=     ==     *  H    O      H          ====",
+      "=           ***                        =* =",
+      "=   ***      *        O       *        ** =",
+      "===   *        *  H     H    ***      *** =",
+      "=           ****  **          *           =",
+      "=     *   ==  ==  =  ==           =       =",
+      "=    **        =         ***     ===      =",
+      "==    *        =       *******    =       =",
+      "===                       **              =",
       "=     *   ==  ==  =  ==           =     * =",
       "=    **        =          ***    ===      =",
       "==    *        =        *******   =       =",
@@ -76,7 +90,7 @@
         "senseRadius": 5,
         "diet": ["shrub"]
       },
-      "actions": ["hunt", "herd", "go"]
+      "actions": ["herd", "hunt", "go"]
     },
     "Predator": {
       "type": "animal",
@@ -91,6 +105,20 @@
         "diet": ["herbivore"]
       },
       "actions": ["herd", "hunt", "go"]
+    },
+    "Nomnivore": {
+      "type": "animal",
+      "properties": {
+        "species": "nomnivore",
+        "image": "O",
+        "baseEnergy": 30,
+        "maxEnergy": 90,
+        "movementCost": 0.8,
+        "metabolism": 0.2,
+        "senseRadius": 5,
+        "diet": ["herbivore", "predator", "shrub"]
+      },
+      "actions": ["hunt", "go"]
     }
   }
 }
