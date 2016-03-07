@@ -1,6 +1,6 @@
 {
   "app": {
-    "timeout": 1
+    "timeout": 450
   },
   "world": {
     "legend": [
