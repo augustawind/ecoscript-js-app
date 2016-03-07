@@ -1,14 +1,13 @@
 {
   "app": {
-    "timeout": 500 
+    "timeout": 1
   },
   "world": {
     "legend": [
       ["=", "Wall"],
       ["*", "Shrub"],
       ["H", "Herbivore"],
-      ["@", "Predator"],
-      ["O", "Nomnivore"]
+      ["@", "Predator"]
     ],
     "smartAvoid-map": [
       "========================",
@@ -56,9 +55,9 @@
       "=    **        =          ***    ===      =",
       "==    *        =        *******   =       =",
       "===                       ***             =",
-      "=     ==     *  H    O      H          ====",
+      "=     ==     *  H           H          ====",
       "=           ***                        =* =",
-      "=   ***      *        O       *        ** =",
+      "=   ***      *                *        ** =",
       "===   *        *  H     H    ***      *** =",
       "=           ****  **          *           =",
       "=     *   ==  ==  =  ==           =       =",
@@ -119,20 +118,6 @@
         "diet": ["herbivore"]
       },
       "actions": ["herd", "hunt", "go"]
-    },
-    "Nomnivore": {
-      "type": "animal",
-      "properties": {
-        "species": "nomnivore",
-        "image": "O",
-        "baseEnergy": 30,
-        "maxEnergy": 90,
-        "movementCost": 0.8,
-        "metabolism": 0.2,
-        "senseRadius": 5,
-        "diet": ["herbivore", "predator", "shrub"]
-      },
-      "actions": ["hunt", "go"]
     }
   }
 }
