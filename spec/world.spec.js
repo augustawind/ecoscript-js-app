@@ -95,12 +95,12 @@ describe('World constructor', () => {
         'ab',
         'cd',
       ]
-      const legend = new Map([
-        ['a', makeThing('a')],
-        ['b', makeThing('b')],
-        ['c', makeThing('c')],
-        ['d', makeThing('d')],
-      ])
+      const legend = {
+        'a': makeThing('a'),
+        'b': makeThing('b'),
+        'c': makeThing('c'),
+        'd': makeThing('d'),
+      }
       const world = World.fromLegend(legend, keysArray)
 
       const a = world.get(new Vector(0, 0))

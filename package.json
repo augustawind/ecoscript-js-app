@@ -29,6 +29,7 @@
     "easystarjs": "0.2.3",
     "express": "4.13.4",
     "express-markdown-router": "1.0.1",
+    "js-yaml": "3.5.3",
     "lodash": "4.3.0",
     "stampit": "2.1.1"
   },

@@ -29,7 +29,7 @@ app.get('/', (request, response) => {
 // example.json
 app.get('/example', (request, response) => {
   response.set('Content-Type', 'application/json')
-  response.download(path.join('public', 'example.json'))
+  response.download(path.join('public', 'example.yml'))
 })
 
 app.listen(app.get('port'), () => {
