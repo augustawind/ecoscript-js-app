@@ -26,12 +26,6 @@ app.get('/', (request, response) => {
   response.render('index')
 })
 
-// Watch page
-app.get('/play', (request, response) => {
-  response.render('play')
-})
-
-
 // example.json
 app.get('/example', (request, response) => {
   response.set('Content-Type', 'application/json')

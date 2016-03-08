@@ -2,19 +2,57 @@
 
 # Creating your own ecosystem 
 
-Creating your own ecosystem is easy and requires no programming experience.
-To get started, download the example configuration
-[here](example) and open it with your favorite text editor.
-I recommend using [this online text
-editor](http://www.cleancss.com/json-editor/). It will automatically check
-your file for syntax errors as you type.
+Creating your own ecosystem is easy and requires no programming experience. To get started, download the example configuration [here](example) and open it with your favorite text editor.
 
-## Syntax
+## Basic format
 
-Ecosystems are configured in text files that use a simple format called
-**JSON** (short for *JavaScript Object Notation*, but don't worry about that).
-In order for the program to read your configuration file correctly, it must be
-formatted properly.
+Ecosystem files follow a simple format that looks like this:
+
+    {
+      "world": {
+        "map": [
+          "======",
+          "=  &&=",
+          "=    =",
+          "=    =",
+          "= P  =",
+          "======"
+        ],
+        "legend": [
+          ["=", "Wall"],
+          ["&", "SomeOrganism"],
+          ["P", "SomeOtherOrganism"]
+        ]
+      },
+      "organisms": {
+        "SomeOrganism": {
+          "type": "plant",
+          "properties": {
+            "property1": "value",
+            "property2": "value",
+            ...
+            "propertyN": "value"
+          },
+          "actions": ["action1", "action2", ..."actionN"]
+        },
+        "SomeOtherOrganism": {
+          "type": "animal",
+          "properties": {
+            "property1": "value",
+            "property2": "value",
+            ...
+            "propertyN": "value"
+          },
+          "actions": ["action1", "action2", ..."actionN"]
+        }
+      }
+    }
+
+If that looks scary, don't worry! We'll break it down for you piece by piece.
+
+## Advanced
+
+### JSON
 
 Here is a simple example of properly formatted JSON:
 
