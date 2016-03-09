@@ -47,8 +47,10 @@
   <body>
     <div class="container">
 
-      <input type="file" id="select-file">
-      <button type="button" id="submit-file" class="btn">Submit</button>
+      <form action="app" method="post" enctype="multipart/form-data">
+        <input type="file" name="configFile">
+        <input type="submit">
+      </form>
 
       <pre id="ecosystem"></pre>
 

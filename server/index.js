@@ -1,10 +1,15 @@
+import fs from 'fs'
 import path from 'path'
 
 import express from 'express'
 import markdownRouter from 'express-markdown-router'
+import multer from 'multer'
 import consolidate from 'consolidate'
 
 const app = express()
+
+const storage = multer.memoryStorage()
+const upload = multer({ storage })
 
 app.set('port', process.env.PORT || 5000)
 
@@ -29,6 +34,12 @@ app.get('/', (request, response) => {
 // App page
 app.get('/app', (request, response) => {
   response.render('app')
+})
+
+// config file upload
+app.post('/app', upload.single('configFile'), (request, response) => {
+  const data = request.file.toString('utf-8')
+  response.redirect('app')
 })
 
 // Example config
