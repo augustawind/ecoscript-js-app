@@ -1,20 +1,25 @@
-import path from 'path'
-
+import browserify from 'browserify-middleware'
 import express from 'express'
 import jade from 'jade'
-import multer from 'multer'
+import path from 'path'
+
+const dotslash = _path => path.join(__dirname, _path)
 
 const app = express()
 
+// settings
+
 app.set('port', process.env.PORT || 5000)
-
-// Static file server
-app.use(express.static(path.join(__dirname, 'public')))
-app.use('/scripts',
-  express.static(path.join(__dirname, '/node_modules/babel-polyfill/dist/')))
-
 app.set('view engine', 'jade')
-app.set('views', path.join(__dirname, '/views'))
+app.set('views', dotslash('/views'))
+
+// middleware
+
+app.use(express.static(dotslash('public')))
+
+// routes
+
+app.get('/js/bundle.js', browserify(dotslash('/client/main.js')))
 
 app.get('/', (request, response) => {
   response.render('index')
