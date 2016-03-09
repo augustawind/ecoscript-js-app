@@ -1,0 +1,28 @@
+extends ./layout.jade
+
+block head
+  style.
+    @font-face {
+      font-family: "Joystix";
+      src: url("joystix.ttf") format("ttf");
+    }
+    #ecosystem {
+      line-height: 15px;
+      font-size: 18px;
+      font-family: "Joystix", monospace;
+      display: table;
+      margin: 20px auto;
+    }
+    footer {
+      text-align: center;
+      padding-bottom: 20px;
+    }
+    .content {
+      padding: 10px 0;
+    }
+
+    script(src="scripts/polyfill.min.js")
+    script(src="bundle.js")
+
+block content
+  pre#ecosystem
