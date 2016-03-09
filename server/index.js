@@ -24,6 +24,10 @@ app.get('/play', (request, response) => {
   response.render('play')
 })
 
+app.get('/guide', (request, response) => {
+  response.render('guide')
+})
+
 app.get('/example', (request, response) => {
   response.set('Content-Type', 'text/yaml')
   response.download(path.join('public', 'example.yml'))
