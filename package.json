@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/dustinrohde/ecosystem"
   },
-  "main": "client/app.js",
+  "main": "client/main.js",
   "directories": {
     "test": "test"
   },
@@ -49,10 +49,10 @@
     "start": "node index.js",
     "postinstall": "npm run build",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "browserify client/app.js -o public/bundle.js -dv",
+    "build:client": "browserify client/main.js -o public/bundle.js -dv",
     "build:server": "babel server/index.js -o index.js",
     "watch": "npm run watch:client & npm run watch:server & nodemon",
-    "watch:client": "watchify client/app.js -o public/bundle.js -dv",
+    "watch:client": "watchify client/main.js -o public/bundle.js -dv",
     "watch:server": "babel server/index.js -o index.js --watch",
     "prewatch:server": "npm run build:server",
     "lint": "eslint server/*.js client/*.js",
