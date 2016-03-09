@@ -2,9 +2,11 @@
 
 # Ecosystem simulator
 
-Below is a simulation of a simple ecosystem.
+Click below to watch a simulation of a simple ecosystem.
 
-<pre id="ecosystem"></pre>
+<a href="app">
+  <button type="button" class="btn">See it in action</button>
+</a>
 
 It contains the following:
 

@@ -26,7 +26,12 @@ app.get('/', (request, response) => {
   response.render('index')
 })
 
-// example.json
+// App page
+app.get('/app', (request, response) => {
+  response.render('app')
+})
+
+// Example config
 app.get('/example', (request, response) => {
   response.set('Content-Type', 'application/json')
   response.download(path.join('public', 'example.yml'))
