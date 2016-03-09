@@ -46,16 +46,16 @@
     "transform": "babelify"
   },
   "scripts": {
+    "start": "node index.js",
     "postinstall": "npm run build",
     "build": "npm run build:client && npm run build:server",
     "build:client": "browserify client/app.js -o public/bundle.js -dv",
     "build:server": "babel server/index.js -o index.js",
-    "lint": "eslint server/*.js client/*.js",
-    "test": "babel-node spec/specRunner.js",
-    "watch": "npm run watch:client & npm run watch:server",
+    "watch": "npm run watch:client & npm run watch:server & nodemon",
     "watch:client": "watchify client/app.js -o public/bundle.js -dv",
     "watch:server": "babel server/index.js -o index.js --watch",
-    "prestart": "npm run build",
-    "start": "npm run watch & nodemon"
+    "prewatch:server": "npm run build:server",
+    "lint": "eslint server/*.js client/*.js",
+    "test": "babel-node spec/specRunner.js"
   }
 }
