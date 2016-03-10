@@ -19,6 +19,7 @@
     "watchify": "3.7.0"
   },
   "dependencies": {
+    "ajax": "0.0.4",
     "babel-cli": "6.5.1",
     "babel-plugin-transform-object-rest-spread": "6.5.0",
     "babel-polyfill": "6.5.0",
