@@ -24,7 +24,6 @@
     "babel-polyfill": "6.5.0",
     "babel-preset-es2015": "6.5.0",
     "babelify": "7.2.0",
-    "browserify": "13.0.0",
     "browserify-middleware": "7.0.0",
     "easystarjs": "0.2.3",
     "express": "4.13.4",
@@ -50,13 +49,9 @@
   "scripts": {
     "start": "node index.js",
     "postinstall": "npm run build",
-    "build": "npm run build:client && npm run build:server",
-    "build:client": "browserify client/main.js -o public/bundle.js -dv",
-    "build:server": "babel server/index.js -o index.js",
-    "watch": "npm run watch:client & npm run watch:server & nodemon",
-    "watch:client": "watchify client/main.js -o public/bundle.js -dv",
-    "watch:server": "babel server/index.js -o index.js --watch",
-    "prewatch:server": "npm run build:server",
+    "build": "babel server/index.js -o index.js",
+    "watch": "babel server/index.js -o index.js --watch & nodemon",
+    "prewatch": "npm run build",
     "lint": "eslint server/*.js client/*.js",
     "test": "babel-node spec/specRunner.js"
   }
