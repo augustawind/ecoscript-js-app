@@ -1,3 +1,4 @@
+import 'jade'
 import browserify from 'browserify-middleware'
 import express from 'express'
 import path from 'path'

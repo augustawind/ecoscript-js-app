@@ -5,3 +5,7 @@ block head
 
 block content
   pre#ecosystem
+
+  form(method="POST", action="upload", enctype="multipart/form-data")
+    | Select a config file to upload:
+    input(type="file", name="config", onchange="fileUpload(event)")
