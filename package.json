@@ -1,21 +1,19 @@
 {
-  "name": "ecos",
+  "name": "ecoscript-app",
   "version": "0.0.1",
   "description": "Ecosystem simulator",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dustinrohde/ecosystem"
+    "url": "git+https://github.com/dustinrohde/ecosystem.git"
   },
   "directories": {
     "test": "test"
   },
   "author": "Dustin Rohde",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "devDependencies": {
     "eslint": "2.2.0",
-    "jasmine": "2.4.1",
-    "nodemon": "1.9.1",
-    "watchify": "3.7.0"
+    "nodemon": "1.9.1"
   },
   "dependencies": {
     "ajax": "0.0.4",
@@ -53,7 +51,18 @@
     "build": "babel server/index.js -o index.js",
     "watch": "babel server/index.js -o index.js --watch & nodemon",
     "prewatch": "npm run build",
-    "lint": "eslint server/*.js client/*.js",
-    "test": "babel-node spec/specRunner.js"
-  }
+    "lint": "eslint server/*.js client/*.js"
+  },
+  "bugs": {
+    "url": "https://github.com/dustinrohde/ecosystem/issues"
+  },
+  "homepage": "https://github.com/dustinrohde/ecosystem#readme",
+  "main": "index.js",
+  "keywords": [
+    "ecosystem",
+    "simulator",
+    "app",
+    "sandbox",
+    "website"
+  ]
 }
