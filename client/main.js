@@ -3,7 +3,11 @@ import ecoscript from 'ecoscript'
 
 function animate(ecosystem, canvas) {
   const interval = 450
-  const step = () => canvas.innerHTML = ecosystem.next().value
+
+  const step = () => {
+    canvas.innerHTML = ecosystem.next().value
+  }
+
   return window.setInterval(step, interval)
 }
 
@@ -12,7 +16,7 @@ window.onload = () => {
 
   const settings = {
     error: (xhr, status, exception) => {
-      console.error(status)
+      console.error(status, exception)
     }
   }
 

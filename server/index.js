@@ -1,6 +1,5 @@
 import browserify from 'browserify-middleware'
 import express from 'express'
-import jade from 'jade'
 import path from 'path'
 
 const dotslash = _path => path.join(__dirname, _path)
