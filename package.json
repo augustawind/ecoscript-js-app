@@ -24,7 +24,7 @@
     "babelify": "7.2.0",
     "browserify-middleware": "7.0.0",
     "easystarjs": "0.2.3",
-    "ecoscript": "file:../ecoscript",
+    "ecoscript": "ecoscript",
     "express": "4.13.4",
     "jade": "1.11.0",
     "js-yaml": "3.5.3",
