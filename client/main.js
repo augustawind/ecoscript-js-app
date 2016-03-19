@@ -1,34 +1,26 @@
-import 'babel-polyfill'
 import ajax from 'ajax'
-import yaml from 'js-yaml'
+import ecoscript from 'ecoscript'
 
-import parseWorld from './configParser'
-
-const exampleURL = 'example.yml'
-const interval = 450
-
-function animateWorld(world, canvas) {
-  const step = () => {
-    canvas.innerHTML = world.toString()
-    world.turn()
-  }
-
+function animate(ecosystem, canvas) {
+  const interval = 450
+  const step = () => canvas.innerHTML = ecosystem.next().value
   return window.setInterval(step, interval)
 }
 
 window.onload = () => {
+  const url = 'example.yml'
+
   const settings = {
     error: (xhr, status, exception) => {
-      console.log(status)
+      console.error(status)
     }
   }
 
   const callback = data => {
-    const config = yaml.safeLoad(data)
-    const world = parseWorld(config)
-    const canvas = window.document.getElementById('ecosystem')
-    animateWorld(world, canvas)
+    const ecosystem = ecoscript(data)
+    const canvas = window.document.querySelector('#ecosystem')
+    animate(ecosystem, canvas)
   }
 
-  ajax.get(exampleURL, settings, callback)
+  ajax.get(url, settings, callback)
 }
