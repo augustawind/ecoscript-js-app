@@ -1,12 +1,8 @@
-@font-face {
-  font-family: "Joystix";
-  src: url("joystix.ttf") format("ttf");
-}
-
 #ecosystem {
   line-height: 15px;
   font-size: 18px;
-  font-family: "Joystix", monospace;
+  font-family:  monospace;
+  font-weight: bold;
   display: table;
   margin: 20px auto;
 }

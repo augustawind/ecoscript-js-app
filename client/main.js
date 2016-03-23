@@ -32,7 +32,7 @@ window.fileUpload = event => {
 }
 
 window.onload = () => {
-  const exampleURL = 'example.yml'
+  const exampleURL = 'example.yaml'
 
   const settings = {
     error: (xhr, status, exception) => {

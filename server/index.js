@@ -16,6 +16,7 @@ app.set('views', dotslash('/views'))
 // middleware
 
 app.use(express.static(dotslash('public')))
+app.use(express.static(dotslash('node_modules/ecoscript/examples/')))
 
 // routes
 
