@@ -1,0 +1,6 @@
+---
+organisms:
+  '=': 'tree-green.png'
+  '*': 'shrub.png'
+  'H': 'sheep.png'
+  '@': 'bear-grizzly.png'
