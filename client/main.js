@@ -1,6 +1,7 @@
 import ajax from 'ajax'
 import ecoscript from 'ecoscript'
 import forOwn from 'lodash/forOwn'
+import toArray from 'lodash/toArray'
 import yaml from 'js-yaml'
 import zip from 'lodash/zip'
 
@@ -46,13 +47,13 @@ window.onload = () => {
       // All images loaded
       loadImages(urlMap.organisms, images => {
         // Create sprites
-        const sprites = ecosystem.enumerate().map(({ vector, thing }) => {
+        const sprites = ecosystem.enumerateChars().map(({ vector, chr }) => {
           return new Sprite({
-            image: thing ? images[thing.string] : images[' '],
+            image: images[chr],
             width: TILE_WIDTH,
             height: TILE_HEIGHT,
-            x: vector.x,
-            y: vector.y,
+            x: vector.x * TILE_WIDTH,
+            y: vector.y * TILE_HEIGHT,
           })
         })
 
@@ -67,8 +68,8 @@ function mainloop(ctx, ecosystem, sprites, lastTime = Date.now()) {
   // Update and render sprites
   zip(ecosystem.enumerate(), sprites).forEach(
     ([{ vector }, sprite]) => {
-      sprite.x = vector.x
-      sprite.y = vector.y
+      sprite.x = vector.x * TILE_WIDTH
+      sprite.y = vector.y * TILE_HEIGHT
       sprite.render(ctx)
     }
   )
@@ -79,7 +80,7 @@ function mainloop(ctx, ecosystem, sprites, lastTime = Date.now()) {
   }
 
   lastTime = now
-  window.requestAnimationFrame(mainloop)
+  window.requestAnimationFrame(() => mainloop(ctx, ecosystem, sprites, lastTime))
 }
 
 function loadImages(urlMap, onLoad) {

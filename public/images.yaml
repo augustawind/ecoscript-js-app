@@ -4,3 +4,4 @@ organisms:
   '*': 'shrub.png'
   'H': 'sheep.png'
   '@': 'bear-grizzly.png'
+  ' ': 'floor-cobblestone.png'
