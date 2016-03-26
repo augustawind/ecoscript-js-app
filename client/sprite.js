@@ -8,6 +8,9 @@ export default class Sprite {
   }
 
   render(ctx) {
+    ctx.imageSmoothingEnabled = false
+    ctx.webkitImageSmoothingEnabled = false
+    ctx.mozImageSmoothingEnabled = false
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
   }
 }
