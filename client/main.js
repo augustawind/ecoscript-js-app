@@ -58,29 +58,42 @@ window.onload = () => {
         })
 
         // Start simulation
-        mainloop(ctx, ecosystem, sprites)
+        start(ctx, ecosystem, sprites)
       })
     })
   })
 }
 
-function mainloop(ctx, ecosystem, sprites, lastTime = Date.now()) {
-  // Update and render sprites
-  zip(ecosystem.enumerate(), sprites).forEach(
-    ([{ vector }, sprite]) => {
-      sprite.x = vector.x * TILE_WIDTH
-      sprite.y = vector.y * TILE_HEIGHT
-      sprite.render(ctx)
-    }
-  )
+function start(ctx, ecosystem, sprites) {
+  let last = 0
 
-  let now = Date.now()
-  while (now - lastTime < DELAY) {
-    now = Date.now()
+  const next = () => {
+    window.requestAnimationFrame(next)
+
+    // Manage animation speed
+    const now = Date.now()
+    if (now - last < DELAY) return
+
+    // Reset timeclock
+    last = now
+
+    // Clear canvas
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+
+    // Update and render sprites
+    zip(ecosystem.enumerate(), sprites).forEach(
+      ([{ vector }, sprite]) => {
+        sprite.x = vector.x * TILE_WIDTH
+        sprite.y = vector.y * TILE_HEIGHT
+        sprite.render(ctx)
+      }
+    )
+
+    // Turn ecosystem
+    ecosystem.turn()
   }
 
-  lastTime = now
-  window.requestAnimationFrame(() => mainloop(ctx, ecosystem, sprites, lastTime))
+  window.requestAnimationFrame(next)
 }
 
 function loadImages(urlMap, onLoad) {

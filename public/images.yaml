@@ -1,4 +1,6 @@
 ---
+background: 'floor-cobblestone.png'
+
 organisms:
   '=': 'tree-green.png'
   '*': 'shrub.png'
