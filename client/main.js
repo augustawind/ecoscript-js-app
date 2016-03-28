@@ -5,11 +5,10 @@ import toArray from 'lodash/toArray'
 import yaml from 'js-yaml'
 import zip from 'lodash/zip'
 
-import Sprite from './sprite'
-
 // Example ecosystem data files
 const EXAMPLE_CONFIG = 'example.yaml'
-const EXAMPLE_IMAGE_MAP = 'images.yaml'
+const EXAMPLE_IMAGES = 'images.yaml'
+
 const IMAGE_DIR = 'img/'
 
 // Dimensions of each tile
@@ -41,30 +40,19 @@ window.onload = () => {
     canvas.height = ecosystem.things.length * TILE_HEIGHT
 
     // Queue loading images
-    ajax.get(EXAMPLE_IMAGE_MAP, settings, imageMapText => {
-      const urlMap = yaml.safeLoad(imageMapText)
+    ajax.get(EXAMPLE_IMAGES, settings, data => {
+      const urls = yaml.safeLoad(data)
 
       // All images loaded
-      loadImages(urlMap.organisms, images => {
-        // Create sprites
-        const sprites = ecosystem.enumerateChars().map(({ vector, chr }) => {
-          return new Sprite({
-            image: images[chr],
-            width: TILE_WIDTH,
-            height: TILE_HEIGHT,
-            x: vector.x * TILE_WIDTH,
-            y: vector.y * TILE_HEIGHT,
-          })
-        })
-
+      loadImages(urls.organisms, images => {
         // Start simulation
-        start(ctx, ecosystem, sprites)
+        start(ctx, ecosystem, images)
       })
     })
   })
 }
 
-function start(ctx, ecosystem, sprites) {
+function start(ctx, ecosystem, images) {
   let last = 0
 
   const next = () => {
@@ -72,7 +60,7 @@ function start(ctx, ecosystem, sprites) {
 
     // Manage animation speed
     const now = Date.now()
-    if (now - last < DELAY) return
+    //if (now - last < DELAY) return
 
     // Reset timeclock
     last = now
@@ -80,14 +68,17 @@ function start(ctx, ecosystem, sprites) {
     // Clear canvas
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
-    // Update and render sprites
-    zip(ecosystem.enumerate(), sprites).forEach(
-      ([{ vector }, sprite]) => {
-        sprite.x = vector.x * TILE_WIDTH
-        sprite.y = vector.y * TILE_HEIGHT
-        sprite.render(ctx)
-      }
-    )
+    // Render ecosystem
+    ecosystem.enumerateChars().forEach(({ vector, chr }) => {
+      ctx.imageSmoothingEnabled = false
+      ctx.webkitImageSmoothingEnabled = false
+      ctx.mozImageSmoothingEnabled = false
+      ctx.drawImage(
+        images[chr],
+        vector.x * TILE_WIDTH, vector.y * TILE_HEIGHT,
+        TILE_WIDTH, TILE_HEIGHT
+      )
+    })
 
     // Turn ecosystem
     ecosystem.turn()
@@ -96,16 +87,17 @@ function start(ctx, ecosystem, sprites) {
   window.requestAnimationFrame(next)
 }
 
-function loadImages(urlMap, onLoad) {
+function loadImages(urls, onLoad) {
   const images = {}
 
-  forOwn(urlMap, (url, key) => {
+  forOwn(urls, (url, key) => {
     const img = new Image()
 
     img.onload = () => {
       images[key] = img
 
-      if (Object.keys(images).length === Object.keys(urlMap).length) {
+      // Fire callback once all images are loaded
+      if (Object.keys(images).length === Object.keys(urls).length) {
         onLoad(images)
       }
     }
