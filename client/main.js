@@ -1,9 +1,7 @@
 import ajax from 'ajax'
 import ecoscript from 'ecoscript'
 import forOwn from 'lodash/forOwn'
-import toArray from 'lodash/toArray'
 import yaml from 'js-yaml'
-import zip from 'lodash/zip'
 
 // Example ecosystem data files
 const EXAMPLE_CONFIG = 'example.yaml'
@@ -12,11 +10,11 @@ const EXAMPLE_IMAGES = 'images.yaml'
 const IMAGE_DIR = 'img/'
 
 // Dimensions of each tile
-const TILE_WIDTH = 32
-const TILE_HEIGHT = 32
+const TILE_WIDTH = 16
+const TILE_HEIGHT = 16
 
 // Delay in milliseconds between each turn
-const DELAY = 500
+const DELAY = 300
 
 window.onload = () => {
   // AJAX settings
@@ -44,7 +42,7 @@ window.onload = () => {
       const urls = yaml.safeLoad(data)
 
       // All images loaded
-      loadImages(urls.organisms, images => {
+      loadImages(urls, images => {
         // Start simulation
         start(ctx, ecosystem, images)
       })
@@ -60,7 +58,7 @@ function start(ctx, ecosystem, images) {
 
     // Manage animation speed
     const now = Date.now()
-    //if (now - last < DELAY) return
+    if (now - last < DELAY) return
 
     // Reset timeclock
     last = now
@@ -69,15 +67,20 @@ function start(ctx, ecosystem, images) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
     // Render ecosystem
-    ecosystem.enumerateChars().forEach(({ vector, chr }) => {
+    ecosystem.enumerate().forEach(({ vector, thing }) => {
+      // Disable antialiasing
       ctx.imageSmoothingEnabled = false
       ctx.webkitImageSmoothingEnabled = false
       ctx.mozImageSmoothingEnabled = false
-      ctx.drawImage(
-        images[chr],
-        vector.x * TILE_WIDTH, vector.y * TILE_HEIGHT,
-        TILE_WIDTH, TILE_HEIGHT
-      )
+
+      // Draw entity if not empty
+      if (thing) {
+        ctx.drawImage(
+          images[thing.string],
+          vector.x * TILE_WIDTH, vector.y * TILE_HEIGHT,
+          TILE_WIDTH, TILE_HEIGHT
+        )
+      }
     })
 
     // Turn ecosystem

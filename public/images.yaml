@@ -1,9 +1,5 @@
 ---
-background: 'floor-cobblestone.png'
-
-organisms:
-  '=': 'tree-green.png'
-  '*': 'shrub.png'
-  'H': 'sheep.png'
-  '@': 'bear-grizzly.png'
-  ' ': 'floor-cobblestone.png'
+'=': 'tree-green.png'
+'*': 'shrub.png'
+'H': 'sheep.png'
+'@': 'bear-grizzly.png'
