@@ -1,8 +1,11 @@
 extends ./layout.jade
 
-block content
+block head
+  script(src="js/bundle.js")
 
-  :marked
-    Welcome to EcoScript.Me, the ecosystem simulator where you make the rules.
-    Go to the [play page](play) to see an example of a basic ecosystem, and 
-    read [the guide](guide) to find out how to make your own.
+block content
+  canvas#ecosystem
+
+  form(method="POST", action="upload", enctype="multipart/form-data")
+    p Select a config file to upload:
+    input(type="file", name="config", onchange="fileUpload(event)")
